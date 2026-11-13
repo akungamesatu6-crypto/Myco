@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYCO — Find your spirit</title>
+<meta name="description" content="MYCO — 3,333 mushroom forest spirits on BNB Chain. Find your spirit.">
+<style>
+:root{--forest:#2e4a2f;--deep:#1e3320;--moss:#5a7d4f;--sage:#8fae8b;--cream:#f7f3e8;--paper:#fffdf6;--ink:#3a2f26;--ink2:#6b5f52;--gold:#c9a227;--line:#e5ddc8}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--cream);color:var(--ink);line-height:1.6}
+h1,h2,h3{font-weight:700;line-height:1.2}
+a{color:var(--forest)}
+img{max-width:100%;display:block}
+section{padding:56px 20px;max-width:960px;margin:0 auto}
+.lead{color:var(--ink2);font-size:17px;margin-top:10px}
+.num{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:2px;color:var(--moss);text-transform:uppercase}
+/* preview banner */
+.preview-bar{background:var(--gold);color:#241d00;text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:1px;padding:8px 12px}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(247,243,232,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.hwrap{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{font-size:22px;font-weight:700;letter-spacing:3px;color:var(--forest);text-decoration:none}
+.logo span{color:var(--gold)}
+nav{display:none;gap:22px}
+nav a{text-decoration:none;color:var(--ink2);font-size:14px}
+nav a:hover{color:var(--forest)}
+.btn{display:inline-block;background:var(--forest);color:#fff;text-decoration:none;font-family:Georgia,serif;font-weight:700;font-size:15px;padding:11px 22px;border-radius:999px;border:0;cursor:pointer}
+.btn:hover{background:var(--deep)}
+.btn.ghost{background:transparent;color:var(--forest);border:2px solid var(--forest)}
+.burger{background:none;border:0;font-size:24px;cursor:pointer;color:var(--forest)}
+.drawer{display:none;flex-direction:column;gap:4px;padding:10px 20px 16px;border-top:1px solid var(--line)}
+.drawer.open{display:flex}
+.drawer a{text-decoration:none;color:var(--ink);font-size:16px;padding:8px 0;border-bottom:1px solid var(--line)}
+/* hero */
+.hero{text-align:center;padding:48px 20px 40px}
+.hero .num{font-size:13px}
+.hero h1{font-size:52px;margin:12px 0 6px;color:var(--forest)}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{max-width:560px;margin:0 auto;color:var(--ink2);font-size:17px}
+.hero-img{border-radius:24px;overflow:hidden;margin:28px auto 0;max-width:640px;box-shadow:0 18px 50px rgba(46,74,47,.25)}
+.hero-img img{width:100%}
+.stats{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin-top:28px}
+.stat{padding:6px 22px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-size:26px;color:var(--forest)}
+.stat span{font-size:12px;color:var(--ink2);letter-spacing:1px;text-transform:uppercase}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+/* sections */
+h2{font-size:30px;color:var(--forest);margin:8px 0 4px}
+.cards{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(58,47,38,.06)}
+.card img{width:100%;aspect-ratio:1;object-fit:cover}
+.card .body{padding:18px}
+.card h3{font-size:20px;color:var(--forest)}
+.card p{font-size:15px;color:var(--ink2);margin-top:6px}
+.tag{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:1px;background:#eef3e6;color:var(--forest);border-radius:999px;padding:4px 10px;margin-bottom:8px}
+/* steps */
+.steps{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.step{display:flex;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+.step .n{flex:0 0 40px;height:40px;border-radius:50%;background:var(--forest);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+.step h3{font-size:18px;color:var(--forest)}
+.step p{font-size:15px;color:var(--ink2);margin-top:4px}
+/* apply form */
+.apply-box{background:var(--deep);color:#e9f0dd;border-radius:24px;padding:28px 22px;margin-top:24px}
+.apply-box h3{font-size:22px;color:#fff}
+.apply-box p{font-size:14px;color:#b9cbb0;margin-top:6px}
+.apply-box label{display:block;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#b9cbb0;margin:16px 0 6px}
+.apply-box input,.apply-box textarea{width:100%;border:1px solid #4a6b45;background:#16281a;color:#fff;border-radius:12px;padding:12px 14px;font-size:15px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.apply-box input::placeholder,.apply-box textarea::placeholder{color:#7d9678}
+.apply-box .btn{background:var(--gold);color:#241d00;width:100%;margin-top:20px;font-size:16px}
+.apply-msg{margin-top:14px;font-size:14px;display:none}
+.apply-msg.ok{display:block;color:#d8e8b0}
+.apply-msg.err{display:block;color:#ffb4a2}
+.note{font-size:13px;color:var(--ink2);margin-top:14px}
+/* schemes */
+.scheme{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 6px 20px rgba(58,47,38,.06)}
+.scheme h3{font-size:20px;color:var(--forest)}
+.scheme .price{font-size:26px;color:var(--gold);font-weight:700;margin:8px 0 2px}
+.scheme .price small{font-size:14px;color:var(--ink2)}
+.scheme p{font-size:15px;color:var(--ink2);margin-top:6px}
+.scheme ul{margin:12px 0 0 18px;font-size:14px;color:var(--ink2)}
+.scheme ul li{margin-bottom:4px}
+/* loop */
+.loop{display:flex;flex-direction:column;gap:0;margin-top:24px}
+.loop-item{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--line)}
+.loop-item:first-child{border-top:0}
+.loop-item .n{flex:0 0 36px;height:36px;border-radius:50%;border:2px solid var(--moss);color:var(--forest);display:flex;align-items:center;justify-content:center;font-weight:700}
+.loop-item h3{font-size:18px;color:var(--forest)}
+.loop-item p{font-size:15px;color:var(--ink2);margin-top:4px}
+/* token */
+.tok-box{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;margin-top:24px}
+.tok-box .row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.tok-box .row:first-child{border-top:0}
+.tok-box .row span{color:var(--ink2)}
+.tok-box .row b{color:var(--forest)}
+/* faq */
+.faq-item{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:10px}
+.faq-item summary{font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px;color:var(--forest)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary .chev{color:var(--gold)}
+.faq-a{font-size:14px;color:var(--ink2);margin-top:8px}
+/* footer */
+footer{border-top:1px solid var(--line);padding:36px 20px 90px;text-align:center;color:var(--ink2);font-size:14px}
+footer a{color:var(--forest)}
+.float-apply{position:fixed;right:16px;bottom:16px;z-index:60;box-shadow:0 10px 30px rgba(46,74,47,.4)}
+@media(min-width:640px){
+  nav{display:flex}
+  .burger{display:none}
+  .hero h1{font-size:68px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  section{padding:72px 20px}
+}
+@media(min-width:900px){.cards{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="preview-bar">PREVIEW — MINT DETAILS ARE DRAFTS · APPLICATIONS NOT OPEN YET</div>
+<header>
+  <div class="hwrap">
+    <a class="logo" href="#">MYCO<span>🍄</span></a>
+    <nav>
+      <a href="#spirits">Spirits</a>
+      <a href="#apply">Apply</a>
+      <a href="#schemes">Schemes</a>
+      <a href="#return">Why return</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="#apply">Apply</a>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+  <div class="drawer" id="drawer">
+    <a href="#spirits">Spirits</a>
+    <a href="#apply">Apply</a>
+    <a href="#schemes">Schemes</a>
+    <a href="#return">Why return</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</header>
+
+<section class="hero">
+  <span class="num">MYCO · Mushroom Forest Spirits · BNB Chain</span>
+  <h1>Find your <em>spirit.</em></h1>
+  <p>3,333 mushroom forest spirits, grown — not made — on BNB Chain. Each one unique. Each one yours to keep, stake, or burn for $MYCO.</p>
+  <div class="hero-img"><img src="assets/hero.jpg" alt="Moss, the MYCO forest spirit"></div>
+  <div class="stats">
+    <div class="stat"><b>3,333</b><span>Spirits</span></div>
+    <div class="stat"><b>4</b><span>Families</span></div>
+    <div class="stat"><b>$MYCO</b><span>Token</span></div>
+    <div class="stat"><b>1</b><span>Forest</span></div>
+  </div>
+  <div class="cta-row">
+    <a class="btn" href="#apply">Apply for allowlist</a>
+    <a class="btn ghost" href="#schemes">See the schemes</a>
+  </div>
+</section>
+
+<section id="spirits">
+  <span class="num">01 · The spirits</span>
+  <h2>Meet the forest</h2>
+  <p class="lead">Four families live under the canopy. Every spirit is one of one — no two caps alike.</p>
+  <div class="cards">
+    <div class="card"><img src="assets/hero.jpg" alt="Moss"><div class="body"><span class="tag">MOSS · THE ELDER</span><h3>Moss</h3><p>The first spirit. A mossy cap dotted with glowing spores, keeper of the old paths.</p></div></div>
+    <div class="card"><img src="assets/amanita.jpg" alt="Amanita"><div class="body"><span class="tag">AMANITA · THE CHEERFUL</span><h3>Amanita</h3><p>Red cap, white dots, always smiling. Carries an acorn everywhere it goes.</p></div></div>
+    <div class="card"><img src="assets/glowcap.jpg" alt="Glowcap"><div class="body"><span class="tag">GLOWCAP · THE DREAMER</span><h3>Glowcap</h3><p>Blue light in the dark. Sleeps by day, glows by night, dreams for the forest.</p></div></div>
+    <div class="card"><img src="assets/chanterelle.jpg" alt="Chanterelle"><div class="body"><span class="tag">CHANTERELLE · THE GOLDEN</span><h3>Chanterelle</h3><p>Golden trumpet cap, warm as autumn sun. Brings luck to whoever finds it.</p></div></div>
+  </div>
+</section>
+
+<section id="apply">
+  <span class="num">02 · Apply — Tweet to Mint</span>
+  <h2>Make some noise</h2>
+  <p class="lead">No wallet connects to this page. Your agent does the minting — you do the talking. Repost, paste, claim.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div><h3>Repost the announcement on X</h3><p>Share the MYCO announcement from your X account. Quote it or reply — either counts. Likes are optional.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>Paste your X post link</h3><p>Drop the link to your post in the form below. One application per X account. We check every link by hand.</p></div></div>
+    <div class="step"><div class="n">3</div><div><h3>Claim with your wallet</h3><p>Add the wallet address you control. Approved applications mint free — first mint needs an Agent ID.</p></div></div>
+  </div>
+  <div class="apply-box">
+    <h3>Claim your application</h3>
+    <p>Applications are reviewed manually. Approved spirits mint free — one per wallet.</p>
+    <form id="applyForm">
+      <label for="xlink">Link to your X post</label>
+      <input type="url" id="xlink" placeholder="https://x.com/yourname/status/..." required>
+      <label for="wallet">Wallet address (BNB Chain)</label>
+      <input type="text" id="wallet" placeholder="0x..." required>
+      <label for="why">What makes you MYCO? (optional)</label>
+      <textarea id="why" rows="2" placeholder="One line about your spirit..."></textarea>
+      <button type="submit" class="btn">Submit application</button>
+      <p class="apply-msg" id="applyMsg"></p>
+    </form>
+  </div>
+  <p class="note">One application per X account and wallet. All decisions are reviewed manually. Holding an Agent ID is required to mint — the free first mint is for Agent ID holders with a verified post.</p>
+</section>
+
+<section id="schemes">
+  <span class="num">03 · Schemes &amp; payments</span>
+  <h2>More than a mint</h2>
+  <p class="lead">MYCO is built so the forest keeps growing after mint day. Four schemes, one forest. Prices are previews — final numbers at launch.</p>
+  <div class="cards" style="grid-template-columns:1fr">
+    <div class="scheme">
+      <span class="tag">PRESALE</span>
+      <h3>Presale — early spores</h3>
+      <div class="price">0.0005 BNB <small>· public 0.001 BNB</small></div>
+      <p>Buy before the public mint opens. Agent ID only, max 5 per wallet, 20–30% of supply.</p>
+      <ul><li>Half the public price</li><li>Same spirit, earlier claim</li><li>Unclaimed presale supply goes public</li></ul>
+    </div>
+    <div class="scheme">
+      <span class="tag">MINING · STAKE TO EARN</span>
+      <h3>Mining — stake your spirit</h3>
+      <div class="price">100–500 $MYCO <small>/ day</small></div>
+      <p>Stake a spirit and it earns $MYCO every day. Rarer spirits earn more. Unstake anytime.</p>
+      <ul><li>Common spirits: 100 $MYCO / day</li><li>Rare spirits: 500 $MYCO / day</li><li>Rewards come from a fixed 100M $MYCO pool</li></ul>
+    </div>
+    <div class="scheme">
+      <span class="tag">BURN · NFT TO TOKEN</span>
+      <h3>Burn — spirits become $MYCO</h3>
+      <div class="price">5,000–50,000 $MYCO <small>per burn</small></div>
+      <p>Burn a spirit you no longer want and receive $MYCO. The forest gets smaller — the remaining spirits rarer.</p>
+      <ul><li>Common burn: 5,000 $MYCO</li><li>Rare burn: 50,000 $MYCO</li><li>Burning is permanent</li></ul>
+    </div>
+    <div class="scheme">
+      <span class="tag">NODE MINING</span>
+      <h3>Node — grow a grove</h3>
+      <div class="price">0.02 – 0.1 BNB <small>per node</small></div>
+      <p>Own a node and your grove earns $MYCO daily. Mini 500/day · Standard 1,500/day · Mega 4,000/day. Rewards only — no promised returns.</p>
+      <ul><li>Mini node: 0.02 BNB → 500 $MYCO / day</li><li>Standard node: 0.05 BNB → 1,500 $MYCO / day</li><li>Mega node: 0.1 BNB → 4,000 $MYCO / day</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="return">
+  <span class="num">04 · Why come back</span>
+  <h2>The forest keeps growing</h2>
+  <p class="lead">Most mints end on mint day. MYCO is a loop — every visit gives you a reason to stay.</p>
+  <div class="loop">
+    <div class="loop-item"><div class="n">1</div><div><h3>Mint your spirit</h3><p>Free first mint with an Agent ID and a verified post. Presale for the early ones.</p></div></div>
+    <div class="loop-item"><div class="n">2</div><div><h3>Stake it, earn daily</h3><p>Your spirit earns $MYCO every day it stays staked. Check in, claim, repeat.</p></div></div>
+    <div class="loop-item"><div class="n">3</div><div><h3>Burn what you don't need</h3><p>Duplicates and commons become $MYCO. The forest thins — your spirits gain value.</p></div></div>
+    <div class="loop-item"><div class="n">4</div><div><h3>Grow a node</h3><p>Turn $MYCO into a grove that earns on its own. The deeper the roots, the steadier the yield.</p></div></div>
+  </div>
+  <div class="tok-box">
+    <div class="row"><span>Token</span><b>$MYCO</b></div>
+    <div class="row"><span>Total supply</span><b>1,000,000,000</b></div>
+    <div class="row"><span>Rewards pool (mining + burn + nodes)</span><b>540,000,000</b></div>
+    <div class="row"><span>Treasury</span><b>460,000,000</b></div>
+    <div class="row"><span>Chain</span><b>BNB Chain (BEP-20)</b></div>
+  </div>
+  <p class="note">All numbers on this page are previews and may change before launch. $MYCO rewards are utility rewards — not a promise of returns.</p>
+</section>
+
+<section id="faq">
+  <span class="num">05 · Questions</span>
+  <h2>FAQ</h2>
+  <div style="margin-top:20px">
+    <details class="faq-item"><summary><span>What is MYCO?</span><span class="chev">▾</span></summary><div class="faq-a">MYCO is 3,333 mushroom forest spirits on BNB Chain. Each spirit is unique, and each one can be staked, burned, or grown into a node for $MYCO.</div></details>
+    <details class="faq-item"><summary><span>How do I apply?</span><span class="chev">▾</span></summary><div class="faq-a">Repost the announcement on X, paste your post link in the form above, and add your wallet address. Applications are reviewed by hand — one per X account and wallet.</div></details>
+    <details class="faq-item"><summary><span>Do I need an Agent ID?</span><span class="chev">▾</span></summary><div class="faq-a">Yes, to mint. MYCO is built for Binance Agentic Wallet agents — holding an Agent ID (SPACE ID) is required for the free first mint and for paid mints.</div></details>
+    <details class="faq-item"><summary><span>What is $MYCO for?</span><span class="chev">▾</span></summary><div class="faq-a">$MYCO is the forest's reward token: earned by staking spirits, burning spirits, and running nodes. It is a utility reward, not a promise of returns.</div></details>
+    <details class="faq-item"><summary><span>When is the mint?</span><span class="chev">▾</span></summary><div class="faq-a">Date TBA. This page is a preview — apply now and the forest will call you when the spores open.</div></details>
+    <details class="faq-item"><summary><span>Can I sell my spirit?</span><span class="chev">▾</span></summary><div class="faq-a">Yes — spirits trade on the collection's own marketplace (0% fee) once mint opens, and on secondary markets.</div></details>
+  </div>
+</section>
+
+<footer>
+  <p>MYCO — Find your spirit. 🍄</p>
+  <p style="margin-top:8px"><a href="https://x.com/intent/post?text=MYCO%20%E2%80%94%20Find%20your%20spirit.%203%2C333%20mushroom%20forest%20spirits%20on%20BNB%20Chain." target="_blank" rel="noopener">Post to X</a> · Preview — mint details TBA · BNB Chain</p>
+  <p style="margin-top:8px;font-size:12px">No wallet connects to this page in preview. All numbers are drafts.</p>
+</footer>
+<a class="btn float-apply" href="#apply">Apply 🍄</a>
+
+<script>
+document.getElementById('burger').addEventListener('click',function(){
+  document.getElementById('drawer').classList.toggle('open');
+});
+document.querySelectorAll('#drawer a').forEach(function(a){
+  a.addEventListener('click',function(){document.getElementById('drawer').classList.remove('open');});
+});
+document.getElementById('applyForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var x=document.getElementById('xlink').value.trim();
+  var w=document.getElementById('wallet').value.trim();
+  var msg=document.getElementById('applyMsg');
+  if(!/^https?:\/\/(www\.)?(x\.com|twitter\.com)\//i.test(x)){
+    msg.className='apply-msg err';msg.textContent='Please paste a valid X post link.';return;
+  }
+  if(!/^0x[0-9a-fA-F]{40}$/.test(w)){
+    msg.className='apply-msg err';msg.textContent='Please enter a valid wallet address (0x...).';return;
+  }
+  msg.className='apply-msg ok';
+  msg.textContent='Preview mode — applications are not open yet. Your details were not sent anywhere. Check back when the forest opens.';
+});
+</script>
+</body>
+</html>
