@@ -20,7 +20,7 @@ section{padding:56px 20px;max-width:960px;margin:0 auto;scroll-margin-top:76px}
 .preview-bar{background:var(--gold);color:#241d00;text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:1px;padding:8px 12px}
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(247,243,232,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-.hwrap{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.hwrap{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:10px}
 .logo{font-size:22px;font-weight:700;letter-spacing:3px;color:var(--forest);text-decoration:none}
 .logo span{color:var(--gold)}
 nav{display:none;gap:22px}
@@ -33,6 +33,13 @@ nav a:hover{color:var(--forest)}
 .drawer{display:none;flex-direction:column;gap:4px;padding:10px 20px 16px;border-top:1px solid var(--line)}
 .drawer.open{display:flex}
 .drawer a{text-decoration:none;color:var(--ink);font-size:16px;padding:8px 0;border-bottom:1px solid var(--line)}
+/* language switcher */
+.lang{display:flex;gap:6px;align-items:center}
+.lang button{background:none;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12px;cursor:pointer;color:var(--ink2);font-family:ui-monospace,Menlo,Consolas,monospace}
+.lang button.active{background:var(--forest);color:#fff;border-color:var(--forest)}
+.hwrap .lang{display:none}
+.drawer .lang{margin-top:10px}
+.mint-pill{display:inline-block;background:var(--gold);color:#241d00;font-weight:700;font-size:14px;border-radius:999px;padding:8px 18px;margin-top:18px}
 /* hero */
 .hero{text-align:center;padding:48px 20px 40px}
 .hero .num{font-size:13px}
@@ -56,6 +63,7 @@ h2{font-size:30px;color:var(--forest);margin:8px 0 4px}
 .card h3{font-size:20px;color:var(--forest)}
 .card p{font-size:15px;color:var(--ink2);margin-top:6px}
 .tag{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:1px;background:#eef3e6;color:var(--forest);border-radius:999px;padding:4px 10px;margin-bottom:8px}
+.tag.phase{background:#f3e3a1;color:#6b5410}
 /* steps */
 .steps{display:flex;flex-direction:column;gap:14px;margin-top:24px}
 .step{display:flex;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
@@ -109,6 +117,7 @@ footer a{color:var(--forest)}
 @media(min-width:640px){
   nav{display:flex}
   .burger{display:none}
+  .hwrap .lang{display:flex}
   .hero h1{font-size:68px}
   .cards{grid-template-columns:repeat(2,1fr)}
   section{padding:72px 20px}
@@ -117,190 +126,243 @@ footer a{color:var(--forest)}
 </style>
 </head>
 <body>
-<div class="preview-bar">PREVIEW — MINT DETAILS ARE DRAFTS · APPLICATIONS NOT OPEN YET</div>
+<div class="preview-bar" data-i18n="bar">MINT OPENS TODAY 12:00 UTC · 3,333 SPIRITS</div>
 <header>
   <div class="hwrap">
     <a class="logo" href="#">MYCO<span>🍄</span></a>
     <nav>
-      <a href="#spirits">Spirits</a>
-      <a href="#apply">Apply</a>
-      <a href="#schemes">Schemes</a>
-      <a href="#return">Why return</a>
-      <a href="#faq">FAQ</a>
+      <a href="#spirits" data-i18n="navSpirits">Spirits</a>
+      <a href="#apply" data-i18n="navApply">Apply</a>
+      <a href="#schemes" data-i18n="navSchemes">Schemes</a>
+      <a href="#return" data-i18n="navReturn">Why return</a>
+      <a href="#faq" data-i18n="navFaq">FAQ</a>
     </nav>
-    <a class="btn" href="#apply">Apply</a>
+    <div class="lang" data-lang-group>
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="ja">日本語</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
+    <a class="btn" href="#apply" data-i18n="btnApply">Apply</a>
     <button class="burger" id="burger" aria-label="Menu">☰</button>
   </div>
   <div class="drawer" id="drawer">
-    <a href="#spirits">Spirits</a>
-    <a href="#apply">Apply</a>
-    <a href="#schemes">Schemes</a>
-    <a href="#return">Why return</a>
-    <a href="#faq">FAQ</a>
+    <a href="#spirits" data-i18n="navSpirits">Spirits</a>
+    <a href="#apply" data-i18n="navApply">Apply</a>
+    <a href="#schemes" data-i18n="navSchemes">Schemes</a>
+    <a href="#return" data-i18n="navReturn">Why return</a>
+    <a href="#faq" data-i18n="navFaq">FAQ</a>
+    <div class="lang" data-lang-group>
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="ja">日本語</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <span class="num">MYCO · Mushroom Forest Spirits · BNB Chain</span>
-  <h1>Find your <em>spirit.</em></h1>
-  <p>3,333 mushroom forest spirits, grown — not made — on BNB Chain. Each one unique. Each one yours to keep, stake, or burn for $MYCO.</p>
+  <h1 data-i18n-html="heroH1">Find your <em>spirit.</em></h1>
+  <p data-i18n="heroP">3,333 mushroom forest spirits, grown — not made — on BNB Chain. Each one unique. Each one yours to keep, stake, or burn for $MYCO.</p>
+  <div><span class="mint-pill" data-i18n="mintPill">🍄 Mint opens today · 12:00 UTC (19:00 WIB)</span></div>
   <div class="hero-img"><img src="assets/hero.jpg" alt="Moss, the MYCO forest spirit"></div>
   <div class="stats">
-    <div class="stat"><b>3,333</b><span>Spirits</span></div>
-    <div class="stat"><b>33</b><span>Kinds</span></div>
-    <div class="stat"><b>$MYCO</b><span>Token</span></div>
-    <div class="stat"><b>1</b><span>Forest</span></div>
+    <div class="stat"><b>3,333</b><span data-i18n="statSpirits">Spirits</span></div>
+    <div class="stat"><b>33</b><span data-i18n="statKinds">Kinds</span></div>
+    <div class="stat"><b>$MYCO</b><span data-i18n="statToken">Token</span></div>
+    <div class="stat"><b>1</b><span data-i18n="statForest">Forest</span></div>
   </div>
   <div class="cta-row">
-    <a class="btn" href="#apply">Apply for allowlist</a>
-    <a class="btn ghost" href="#schemes">See the schemes</a>
+    <a class="btn" href="#apply" data-i18n="ctaApply">Apply for allowlist</a>
+    <a class="btn ghost" href="#schemes" data-i18n="ctaSchemes">See the schemes</a>
   </div>
 </section>
 
 <section id="spirits">
-  <span class="num">01 · The spirits</span>
-  <h2>Meet the forest</h2>
-  <p class="lead">Thirty-three kinds live under the canopy — the full forest is here. Every spirit is one of one — no two caps alike.</p>
-  <div class="cards">
-    <div class="card"><img src="assets/hero.jpg" alt="Moss"><div class="body"><span class="tag">MOSS · THE ELDER</span><h3>Moss</h3><p>The first spirit. A mossy cap dotted with glowing spores, keeper of the old paths.</p></div></div>
-    <div class="card"><img src="assets/amanita.jpg" alt="Amanita"><div class="body"><span class="tag">AMANITA · THE CHEERFUL</span><h3>Amanita</h3><p>Red cap, white dots, always smiling. Carries an acorn everywhere it goes.</p></div></div>
-    <div class="card"><img src="assets/glowcap.jpg" alt="Glowcap"><div class="body"><span class="tag">GLOWCAP · THE DREAMER</span><h3>Glowcap</h3><p>Blue light in the dark. Sleeps by day, glows by night, dreams for the forest.</p></div></div>
-    <div class="card"><img src="assets/chanterelle.jpg" alt="Chanterelle"><div class="body"><span class="tag">CHANTERELLE · THE GOLDEN</span><h3>Chanterelle</h3><p>Golden trumpet cap, warm as autumn sun. Brings luck to whoever finds it.</p></div></div>
-    <div class="card"><img src="assets/morel.jpg" alt="Morel"><div class="body"><span class="tag">MOREL · THE WISE</span><h3>Morel</h3><p>The old one. A honeycomb cap and a walking stick — it knows every path in the forest.</p></div></div>
-    <div class="card"><img src="assets/inkcap.jpg" alt="Inkcap"><div class="body"><span class="tag">INKCAP · THE MYSTERIOUS</span><h3>Inkcap</h3><p>Purple ink, twilight air. It appears when the forest dreams.</p></div></div>
-    <div class="card"><img src="assets/coral.jpg" alt="Coral"><div class="body"><span class="tag">CORAL · THE PLAYFUL</span><h3>Coral</h3><p>Pink branches, bright laugh. The forest's loudest little joy.</p></div></div>
-    <div class="card"><img src="assets/enoki.jpg" alt="Enoki"><div class="body"><span class="tag">ENOKI · THE GRACEFUL</span><h3>Enoki</h3><p>Tall, pale, and quiet. It moves like morning mist.</p></div></div>
-    <div class="card"><img src="assets/porcini.jpg" alt="Porcini"><div class="body"><span class="tag">PORCINI · THE STRONG</span><h3>Porcini</h3><p>A big brown cap and a steady heart. The forest's gentle guard.</p></div></div>
-    <div class="card"><img src="assets/oyster.jpg" alt="Oyster"><div class="body"><span class="tag">OYSTER · THE SERENE</span><h3>Oyster</h3><p>Layered like a shell, calm as still water.</p></div></div>
-    <div class="card"><img src="assets/shiitake.jpg" alt="Shiitake"><div class="body"><span class="tag">SHIITAKE · THE KIND</span><h3>Shiitake</h3><p>A warm umbrella in the bamboo grove. Always smiling.</p></div></div>
-    <div class="card"><img src="assets/truffle.jpg" alt="Truffle"><div class="body"><span class="tag">TRUFFLE · THE HIDDEN</span><h3>Truffle</h3><p>Dark, bumpy, and buried deep. It only shows itself to the patient.</p></div></div>
-    <div class="card"><img src="assets/lions-mane.jpg" alt="Lion's Mane"><div class="body"><span class="tag">LION'S MANE · THE GENTLE</span><h3>Lion's Mane</h3><p>White hair like flowing water. The forest's calmest wisdom.</p></div></div>
-    <div class="card"><img src="assets/reishi.jpg" alt="Reishi"><div class="body"><span class="tag">REISHI · THE REGAL</span><h3>Reishi</h3><p>A lacquered red fan, keeper of the old shrine.</p></div></div>
-    <div class="card"><img src="assets/chaga.jpg" alt="Chaga"><div class="body"><span class="tag">CHAGA · THE GUARDIAN</span><h3>Chaga</h3><p>Black bark, amber eyes. It watches over the birch grove.</p></div></div>
-    <div class="card"><img src="assets/blewit.jpg" alt="Blewit"><div class="body"><span class="tag">BLEWIT · THE DREAMER</span><h3>Blewit</h3><p>Soft lilac, gentle dreams. It hums with the wildflowers.</p></div></div>
-    <div class="card"><img src="assets/matsutake.jpg" alt="Matsutake"><div class="body"><span class="tag">MATSUTAKE · THE NOBLE</span><h3>Matsutake</h3><p>A pine-needle crown and a proud heart. The forest's prince.</p></div></div>
-    <div class="card"><img src="assets/cauliflower.jpg" alt="Cauliflower"><div class="body"><span class="tag">CAULIFLOWER · THE SLEEPY</span><h3>Cauliflower</h3><p>A white cloud that never wakes up before noon.</p></div></div>
-    <div class="card"><img src="assets/hedgehog.jpg" alt="Hedgehog"><div class="body"><span class="tag">HEDGEHOG · THE CHEERFUL</span><h3>Hedgehog</h3><p>Spiky cap, round smile. It collects autumn leaves wherever it goes.</p></div></div>
-    <div class="card"><img src="assets/lobster.jpg" alt="Lobster"><div class="body"><span class="tag">LOBSTER · THE BOLD</span><h3>Lobster</h3><p>Bright red-orange, loud laugh. It guards the forest stream.</p></div></div>
-    <div class="card"><img src="assets/parasol.jpg" alt="Parasol"><div class="body"><span class="tag">PARASOL · THE ELEGANT</span><h3>Parasol</h3><p>A wide flat cap like a parasol. It walks the sunny meadow.</p></div></div>
-    <div class="card"><img src="assets/saffron.jpg" alt="Saffron"><div class="body"><span class="tag">SAFFRON · THE LIVELY</span><h3>Saffron</h3><p>Orange-red with green spots. Warm as a pine-forest afternoon.</p></div></div>
-    <div class="card"><img src="assets/honey-cap.jpg" alt="Honey Cap"><div class="body"><span class="tag">HONEY CAP · THE SWEET</span><h3>Honey Cap</h3><p>Golden honey, buzzing bees. The forest's sweetest friend.</p></div></div>
-    <div class="card"><img src="assets/yellowfoot.jpg" alt="Yellowfoot"><div class="body"><span class="tag">YELLOWFOOT · THE SUNNY</span><h3>Yellowfoot</h3><p>Bright yellow stem, sunny smile. It loves forest clearings.</p></div></div>
-    <div class="card"><img src="assets/bluefoot.jpg" alt="Bluefoot"><div class="body"><span class="tag">BLUEFOOT · THE DREAMY</span><h3>Bluefoot</h3><p>Lilac cap, calm and dreamy. It wanders the twilight forest.</p></div></div>
-    <div class="card"><img src="assets/pinkgill.jpg" alt="Pinkgill"><div class="body"><span class="tag">PINKGILL · THE GENTLE</span><h3>Pinkgill</h3><p>Soft pink, shy and gentle. It hides among spring blossoms.</p></div></div>
-    <div class="card"><img src="assets/wood-ear.jpg" alt="Wood Ear"><div class="body"><span class="tag">WOOD EAR · THE LISTENER</span><h3>Wood Ear</h3><p>Brown and quiet. It listens to the forest by the old log.</p></div></div>
-    <div class="card"><img src="assets/jelly.jpg" alt="Jelly"><div class="body"><span class="tag">JELLY · THE GLOWING</span><h3>Jelly</h3><p>Translucent amber, softly glowing. It loves the rain.</p></div></div>
-    <div class="card"><img src="assets/puffball.jpg" alt="Puffball"><div class="body"><span class="tag">PUFFBALL · THE BOUNCY</span><h3>Puffball</h3><p>Round, white and bouncy. It plays in the dandelion meadow.</p></div></div>
-    <div class="card"><img src="assets/shaggy-mane.jpg" alt="Shaggy Mane"><div class="body"><span class="tag">SHAGGY MANE · THE WISE</span><h3>Shaggy Mane</h3><p>Tall, white and wise. The oldest spirit in the misty forest.</p></div></div>
-    <div class="card"><img src="assets/maitake.jpg" alt="Maitake"><div class="body"><span class="tag">MAITAKE · THE PROUD</span><h3>Maitake</h3><p>Layered brown petals, warm and proud. It rules the autumn forest.</p></div></div>
-    <div class="card"><img src="assets/witchs-butter.jpg" alt="Witch's Butter"><div class="body"><span class="tag">WITCH'S BUTTER · THE PLAYFUL</span><h3>Witch's Butter</h3><p>Bright yellow jelly, playful and mischievous. It dances on the mossy log.</p></div></div>
-    <div class="card"><img src="assets/fairy-ring.jpg" alt="Fairy Ring"><div class="body"><span class="tag">FAIRY RING · THE MAGICAL</span><h3>Fairy Ring</h3><p>White cap, glowing ring. The most magical spirit under the moon.</p></div></div>
-  </div>
+  <span class="num" data-i18n="secSpiritsNum">01 · The spirits</span>
+  <h2 data-i18n="secSpiritsH">Meet the forest</h2>
+  <p class="lead" data-i18n="secSpiritsLead">Thirty-three kinds live under the canopy — the full forest is here. Every spirit is one of one — no two caps alike.</p>
+  <div class="cards" id="gallery"></div>
 </section>
 
 <section id="apply">
-  <span class="num">02 · Apply — Tweet to Mint</span>
-  <h2>Make some noise</h2>
-  <p class="lead">No wallet connects to this page. Your agent does the minting — you do the talking. Repost, paste, claim.</p>
+  <span class="num" data-i18n="secApplyNum">02 · Apply — Tweet to Mint</span>
+  <h2 data-i18n="secApplyH">Make some noise</h2>
+  <p class="lead" data-i18n="secApplyLead">No wallet connects to this page. Your agent does the minting — you do the talking. Repost, paste, claim.</p>
   <div class="steps">
-    <div class="step"><div class="n">1</div><div><h3>Repost the announcement on X</h3><p>Share the MYCO announcement from <a href="https://x.com/mycowner" target="_blank" rel="noopener">@mycowner</a> on X. Quote it or reply — either counts. Likes are optional.</p></div></div>
-    <div class="step"><div class="n">2</div><div><h3>Paste your X post link</h3><p>Drop the link to your post in the form below. One application per X account. We check every link by hand.</p></div></div>
-    <div class="step"><div class="n">3</div><div><h3>Claim with your wallet</h3><p>Add the wallet address you control. Approved applications mint free — first mint needs an Agent ID.</p></div></div>
+    <div class="step"><div class="n">1</div><div><h3 data-i18n="step1H">Repost the announcement on X</h3><p data-i18n-html="step1P">Share the MYCO announcement from <a href="https://x.com/mycowner" target="_blank" rel="noopener">@mycowner</a> on X. Quote it or reply — either counts. Likes are optional.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3 data-i18n="step2H">Paste your X post link</h3><p data-i18n="step2P">Drop the link to your post in the form below. One application per X account. We check every link by hand.</p></div></div>
+    <div class="step"><div class="n">3</div><div><h3 data-i18n="step3H">Claim with your wallet</h3><p data-i18n="step3P">Add the wallet address you control. Approved applications mint free — first mint needs an Agent ID.</p></div></div>
   </div>
   <div class="apply-box">
-    <h3>Claim your application</h3>
-    <p>Applications are reviewed manually. Approved spirits mint free — one per wallet.</p>
+    <h3 data-i18n="applyBoxH">Claim your application</h3>
+    <p data-i18n="applyBoxP">Applications are reviewed manually. Approved spirits mint free — one per wallet.</p>
     <form id="applyForm">
-      <label for="xlink">Link to your X post</label>
+      <label for="xlink" data-i18n="labelX">Link to your X post</label>
       <input type="url" id="xlink" placeholder="https://x.com/yourname/status/..." required>
-      <label for="wallet">Wallet address (BNB Chain)</label>
+      <label for="wallet" data-i18n="labelWallet">Wallet address (BNB Chain)</label>
       <input type="text" id="wallet" placeholder="0x..." required>
-      <label for="why">What makes you MYCO? (optional)</label>
-      <textarea id="why" rows="2" placeholder="One line about your spirit..."></textarea>
-      <button type="submit" class="btn">Submit application</button>
+      <label for="why" data-i18n="labelWhy">What makes you MYCO? (optional)</label>
+      <textarea id="why" rows="2" data-i18n-ph="phWhy" placeholder="One line about your spirit..."></textarea>
+      <button type="submit" class="btn" data-i18n="submitBtn">Submit application</button>
       <p class="apply-msg" id="applyMsg"></p>
     </form>
   </div>
-  <p class="note">One application per X account and wallet. All decisions are reviewed manually. Holding an Agent ID is required to mint — the free first mint is for Agent ID holders with a verified post.</p>
+  <p class="note" data-i18n="applyNote">One application per X account and wallet. All decisions are reviewed manually. Holding an Agent ID is required to mint — the free first mint is for Agent ID holders with a verified post.</p>
 </section>
 
 <section id="schemes">
-  <span class="num">03 · Schemes &amp; payments</span>
-  <h2>More than a mint</h2>
-  <p class="lead">MYCO is built so the forest keeps growing after mint day. Four schemes, one forest. Prices are previews — final numbers at launch.</p>
+  <span class="num" data-i18n="secSchemesNum">03 · Schemes &amp; payments</span>
+  <h2 data-i18n="secSchemesH">More than a mint</h2>
+  <p class="lead" data-i18n="secSchemesLead">MYCO is built so the forest keeps growing after mint day. Launch order: Tweet to Mint → Presale → Mining → Burn → Node.</p>
   <div class="cards" style="grid-template-columns:1fr">
     <div class="scheme">
-      <span class="tag">PRESALE</span>
-      <h3>Presale — early spores</h3>
+      <span class="tag" data-i18n="presaleTag">PRESALE</span> <span class="tag phase" data-i18n="presalePhase">OPENS 12:00 UTC</span>
+      <h3 data-i18n="presaleH">Presale — early spores</h3>
       <div class="price">0.0005 BNB <small>· public 0.001 BNB</small></div>
-      <p>Buy before the public mint opens. Agent ID only, max 5 per wallet, 20–30% of supply.</p>
-      <ul><li>Half the public price</li><li>Same spirit, earlier claim</li><li>Unclaimed presale supply goes public</li></ul>
+      <p data-i18n="presaleP">Buy before the public mint opens. Agent ID only, max 5 per wallet, 20–30% of supply.</p>
+      <ul><li data-i18n="presaleB1">Half the public price</li><li data-i18n="presaleB2">Same spirit, earlier claim</li><li data-i18n="presaleB3">Unclaimed presale supply goes public</li></ul>
     </div>
     <div class="scheme">
-      <span class="tag">MINING · STAKE TO EARN</span>
-      <h3>Mining — stake your spirit</h3>
+      <span class="tag" data-i18n="miningTag">MINING · STAKE TO EARN</span> <span class="tag phase" data-i18n="miningPhase">OPENS AFTER MINT</span>
+      <h3 data-i18n="miningH">Mining — stake your spirit</h3>
       <div class="price">1–5 $MYCO <small>/ day</small></div>
-      <p>Stake a spirit and it earns $MYCO every day. Rarer spirits earn more. Unstake anytime.</p>
-      <ul><li>Common spirits: 1 $MYCO / day</li><li>Rare spirits: 5 $MYCO / day</li><li>Rewards come from a fixed 1.8M $MYCO pool</li></ul>
+      <p data-i18n="miningP">Stake a spirit and it earns $MYCO every day. Rarer spirits earn more. Unstake anytime.</p>
+      <ul><li data-i18n="miningB1">Common spirits: 1 $MYCO / day</li><li data-i18n="miningB2">Rare spirits: 5 $MYCO / day</li><li data-i18n="miningB3">Rewards come from a fixed 1.8M $MYCO pool</li></ul>
     </div>
     <div class="scheme">
-      <span class="tag">BURN · NFT TO TOKEN</span>
-      <h3>Burn — spirits become $MYCO</h3>
+      <span class="tag" data-i18n="burnTag">BURN · NFT TO TOKEN</span> <span class="tag phase" data-i18n="burnPhase">OPENS AFTER MINT</span>
+      <h3 data-i18n="burnH">Burn — spirits become $MYCO</h3>
       <div class="price">50–500 $MYCO <small>per burn</small></div>
-      <p>Burn a spirit you no longer want and receive $MYCO. The forest gets smaller — the remaining spirits rarer.</p>
-      <ul><li>Common burn: 50 $MYCO</li><li>Rare burn: 500 $MYCO</li><li>Burning is permanent</li></ul>
+      <p data-i18n="burnP">Burn a spirit you no longer want and receive $MYCO. The forest gets smaller — the remaining spirits rarer.</p>
+      <ul><li data-i18n="burnB1">Common burn: 50 $MYCO</li><li data-i18n="burnB2">Rare burn: 500 $MYCO</li><li data-i18n="burnB3">Burning is permanent</li></ul>
     </div>
     <div class="scheme">
-      <span class="tag">NODE MINING</span>
-      <h3>Node — grow a grove</h3>
+      <span class="tag" data-i18n="nodeTag">NODE MINING</span> <span class="tag phase" data-i18n="nodePhase">OPENS AFTER MINT</span>
+      <h3 data-i18n="nodeH">Node — grow a grove</h3>
       <div class="price">0.02 – 0.1 BNB <small>per node</small></div>
-      <p>Own a node and your grove earns $MYCO daily. Mini 5/day · Standard 15/day · Mega 40/day. Rewards only — no promised returns.</p>
-      <ul><li>Mini node: 0.02 BNB → 5 $MYCO / day</li><li>Standard node: 0.05 BNB → 15 $MYCO / day</li><li>Mega node: 0.1 BNB → 40 $MYCO / day</li></ul>
+      <p data-i18n="nodeP">Own a node and your grove earns $MYCO daily. Mini 5/day · Standard 15/day · Mega 40/day. Rewards only — no promised returns.</p>
+      <ul><li data-i18n="nodeB1">Mini node: 0.02 BNB → 5 $MYCO / day</li><li data-i18n="nodeB2">Standard node: 0.05 BNB → 15 $MYCO / day</li><li data-i18n="nodeB3">Mega node: 0.1 BNB → 40 $MYCO / day</li></ul>
     </div>
   </div>
 </section>
 
 <section id="return">
-  <span class="num">04 · Why come back</span>
-  <h2>The forest keeps growing</h2>
-  <p class="lead">Most mints end on mint day. MYCO is a loop — every visit gives you a reason to stay.</p>
+  <span class="num" data-i18n="secReturnNum">04 · Why come back</span>
+  <h2 data-i18n="secReturnH">The forest keeps growing</h2>
+  <p class="lead" data-i18n="secReturnLead">Most mints end on mint day. MYCO is a loop — every visit gives you a reason to stay.</p>
   <div class="loop">
-    <div class="loop-item"><div class="n">1</div><div><h3>Mint your spirit</h3><p>Free first mint with an Agent ID and a verified post. Presale for the early ones.</p></div></div>
-    <div class="loop-item"><div class="n">2</div><div><h3>Stake it, earn daily</h3><p>Your spirit earns $MYCO every day it stays staked. Check in, claim, repeat.</p></div></div>
-    <div class="loop-item"><div class="n">3</div><div><h3>Burn what you don't need</h3><p>Duplicates and commons become $MYCO. The forest thins — your spirits gain value.</p></div></div>
-    <div class="loop-item"><div class="n">4</div><div><h3>Grow a node</h3><p>Turn $MYCO into a grove that earns on its own. The deeper the roots, the steadier the yield.</p></div></div>
+    <div class="loop-item"><div class="n">1</div><div><h3 data-i18n="loop1H">Mint your spirit</h3><p data-i18n="loop1P">Free first mint with an Agent ID and a verified post. Presale for the early ones.</p></div></div>
+    <div class="loop-item"><div class="n">2</div><div><h3 data-i18n="loop2H">Stake it, earn daily</h3><p data-i18n="loop2P">Your spirit earns $MYCO every day it stays staked. Check in, claim, repeat.</p></div></div>
+    <div class="loop-item"><div class="n">3</div><div><h3 data-i18n="loop3H">Burn what you don't need</h3><p data-i18n="loop3P">Duplicates and commons become $MYCO. The forest thins — your spirits gain value.</p></div></div>
+    <div class="loop-item"><div class="n">4</div><div><h3 data-i18n="loop4H">Grow a node</h3><p data-i18n="loop4P">Turn $MYCO into a grove that earns on its own. The deeper the roots, the steadier the yield.</p></div></div>
   </div>
   <div class="tok-box">
-    <div class="row"><span>Token</span><b>$MYCO</b></div>
-    <div class="row"><span>Total supply</span><b>3,333,000</b></div>
-    <div class="row"><span>Rewards pool (mining + burn + nodes)</span><b>1,800,000</b></div>
-    <div class="row"><span>Treasury</span><b>1,533,000</b></div>
-    <div class="row"><span>Chain</span><b>BNB Chain (BEP-20)</b></div>
+    <div class="row"><span data-i18n="tokToken">Token</span><b>$MYCO</b></div>
+    <div class="row"><span data-i18n="tokSupply">Total supply</span><b>3,333,000</b></div>
+    <div class="row"><span data-i18n="tokPool">Rewards pool (mining + burn + nodes)</span><b>1,800,000</b></div>
+    <div class="row"><span data-i18n="tokTreasury">Treasury</span><b>1,533,000</b></div>
+    <div class="row"><span data-i18n="tokChain">Chain</span><b>BNB Chain (BEP-20)</b></div>
   </div>
-  <p class="note">All numbers on this page are previews and may change before launch. $MYCO rewards are utility rewards — not a promise of returns.</p>
+  <p class="note" data-i18n="tokNote">All numbers on this page are previews and may change before launch. $MYCO rewards are utility rewards — not a promise of returns.</p>
 </section>
 
 <section id="faq">
-  <span class="num">05 · Questions</span>
-  <h2>FAQ</h2>
+  <span class="num" data-i18n="secFaqNum">05 · Questions</span>
+  <h2 data-i18n="secFaqH">FAQ</h2>
   <div style="margin-top:20px">
-    <details class="faq-item"><summary><span>What is MYCO?</span><span class="chev">▾</span></summary><div class="faq-a">MYCO is 3,333 mushroom forest spirits on BNB Chain. Each spirit is unique, and each one can be staked, burned, or grown into a node for $MYCO.</div></details>
-    <details class="faq-item"><summary><span>How do I apply?</span><span class="chev">▾</span></summary><div class="faq-a">Repost the announcement on X, paste your post link in the form above, and add your wallet address. Applications are reviewed by hand — one per X account and wallet.</div></details>
-    <details class="faq-item"><summary><span>Do I need an Agent ID?</span><span class="chev">▾</span></summary><div class="faq-a">Yes, to mint. MYCO is built for Binance Agentic Wallet agents — holding an Agent ID (SPACE ID) is required for the free first mint and for paid mints.</div></details>
-    <details class="faq-item"><summary><span>What is $MYCO for?</span><span class="chev">▾</span></summary><div class="faq-a">$MYCO is the forest's reward token: earned by staking spirits, burning spirits, and running nodes. It is a utility reward, not a promise of returns.</div></details>
-    <details class="faq-item"><summary><span>When is the mint?</span><span class="chev">▾</span></summary><div class="faq-a">Date TBA. This page is a preview — apply now and the forest will call you when the spores open.</div></details>
-    <details class="faq-item"><summary><span>Can I sell my spirit?</span><span class="chev">▾</span></summary><div class="faq-a">Yes — spirits trade on the collection's own marketplace (0% fee) once mint opens, and on secondary markets.</div></details>
+    <details class="faq-item"><summary><span data-i18n="faq1Q">What is MYCO?</span><span class="chev">▾</span></summary><div class="faq-a" data-i18n="faq1A">MYCO is 3,333 mushroom forest spirits on BNB Chain. Each spirit is unique, and each one can be staked, burned, or grown into a node for $MYCO.</div></details>
+    <details class="faq-item"><summary><span data-i18n="faq2Q">How do I apply?</span><span class="chev">▾</span></summary><div class="faq-a" data-i18n="faq2A">Repost the announcement on X, paste your post link in the form above, and add your wallet address. Applications are reviewed by hand — one per X account and wallet.</div></details>
+    <details class="faq-item"><summary><span data-i18n="faq3Q">Do I need an Agent ID?</span><span class="chev">▾</span></summary><div class="faq-a" data-i18n="faq3A">Yes, to mint. MYCO is built for Binance Agentic Wallet agents — holding an Agent ID (SPACE ID) is required for the free first mint and for paid mints.</div></details>
+    <details class="faq-item"><summary><span data-i18n="faq4Q">What is $MYCO for?</span><span class="chev">▾</span></summary><div class="faq-a" data-i18n="faq4A">$MYCO is the forest's reward token: earned by staking spirits, burning spirits, and running nodes. It is a utility reward, not a promise of returns.</div></details>
+    <details class="faq-item"><summary><span data-i18n="faq5Q">When is the mint?</span><span class="chev">▾</span></summary><div class="faq-a" data-i18n="faq5A">Today, Nov 13, 2026 at 12:00 UTC. Tweet to Mint and Presale open together — apply now so you are ready.</div></details>
+    <details class="faq-item"><summary><span data-i18n="faq6Q">Can I sell my spirit?</span><span class="chev">▾</span></summary><div class="faq-a" data-i18n="faq6A">Yes — spirits trade on the collection's own marketplace (0% fee) once mint opens, and on secondary markets.</div></details>
   </div>
 </section>
 
 <footer>
   <p>MYCO — Find your spirit. 🍄</p>
-  <p style="margin-top:8px"><a href="https://x.com/mycowner" target="_blank" rel="noopener">Follow @mycowner</a> · <a href="https://x.com/intent/post?text=MYCO%20%E2%80%94%20Find%20your%20spirit.%203%2C333%20mushroom%20forest%20spirits%20on%20BNB%20Chain.%20%40mycowner" target="_blank" rel="noopener">Post to X</a> · Preview — mint details TBA · BNB Chain</p>
-  <p style="margin-top:8px;font-size:12px">No wallet connects to this page in preview. All numbers are drafts.</p>
+  <p style="margin-top:8px"><a href="https://x.com/mycowner" target="_blank" rel="noopener" data-i18n="footFollow">Follow @mycowner</a> · <a href="https://x.com/intent/post?text=MYCO%20%E2%80%94%20Find%20your%20spirit.%203%2C333%20mushroom%20forest%20spirits%20on%20BNB%20Chain.%20%40mycowner" target="_blank" rel="noopener" data-i18n="footPost">Post to X</a> · <span data-i18n="footTag">Mint opens Nov 13, 12:00 UTC · BNB Chain</span></p>
+  <p style="margin-top:8px;font-size:12px" data-i18n="footNote">Mint opens Nov 13, 12:00 UTC. All numbers are previews.</p>
 </footer>
-<a class="btn float-apply" href="#apply">Apply 🍄</a>
+<a class="btn float-apply" href="#apply" data-i18n="floatApply">Apply 🍄</a>
 
 <script>
+var I18N={
+en:{bar:"MINT OPENS TODAY 12:00 UTC · 3,333 SPIRITS",navSpirits:"Spirits",navApply:"Apply",navSchemes:"Schemes",navReturn:"Why return",navFaq:"FAQ",btnApply:"Apply",heroH1:"Find your <em>spirit.</em>",heroP:"3,333 mushroom forest spirits, grown — not made — on BNB Chain. Each one unique. Each one yours to keep, stake, or burn for $MYCO.",mintPill:"🍄 Mint opens today · 12:00 UTC (19:00 WIB)",statSpirits:"Spirits",statKinds:"Kinds",statToken:"Token",statForest:"Forest",ctaApply:"Apply for allowlist",ctaSchemes:"See the schemes",secSpiritsNum:"01 · The spirits",secSpiritsH:"Meet the forest",secSpiritsLead:"Thirty-three kinds live under the canopy — the full forest is here. Every spirit is one of one — no two caps alike.",secApplyNum:"02 · Apply — Tweet to Mint",secApplyH:"Make some noise",secApplyLead:"No wallet connects to this page. Your agent does the minting — you do the talking. Repost, paste, claim.",step1H:"Repost the announcement on X",step1P:"Share the MYCO announcement from <a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> on X. Quote it or reply — either counts. Likes are optional.",step2H:"Paste your X post link",step2P:"Drop the link to your post in the form below. One application per X account. We check every link by hand.",step3H:"Claim with your wallet",step3P:"Add the wallet address you control. Approved applications mint free — first mint needs an Agent ID.",applyBoxH:"Claim your application",applyBoxP:"Applications are reviewed manually. Approved spirits mint free — one per wallet.",labelX:"Link to your X post",labelWallet:"Wallet address (BNB Chain)",labelWhy:"What makes you MYCO? (optional)",submitBtn:"Submit application",applyNote:"One application per X account and wallet. All decisions are reviewed manually. Holding an Agent ID is required to mint — the free first mint is for Agent ID holders with a verified post.",secSchemesNum:"03 · Schemes & payments",secSchemesH:"More than a mint",secSchemesLead:"MYCO is built so the forest keeps growing after mint day. Launch order: Tweet to Mint → Presale → Mining → Burn → Node.",presaleTag:"PRESALE",presalePhase:"OPENS 12:00 UTC",presaleH:"Presale — early spores",presaleP:"Buy before the public mint opens. Agent ID only, max 5 per wallet, 20–30% of supply.",presaleB1:"Half the public price",presaleB2:"Same spirit, earlier claim",presaleB3:"Unclaimed presale supply goes public",miningTag:"MINING · STAKE TO EARN",miningPhase:"OPENS AFTER MINT",miningH:"Mining — stake your spirit",miningP:"Stake a spirit and it earns $MYCO every day. Rarer spirits earn more. Unstake anytime.",miningB1:"Common spirits: 1 $MYCO / day",miningB2:"Rare spirits: 5 $MYCO / day",miningB3:"Rewards come from a fixed 1.8M $MYCO pool",burnTag:"BURN · NFT TO TOKEN",burnPhase:"OPENS AFTER MINT",burnH:"Burn — spirits become $MYCO",burnP:"Burn a spirit you no longer want and receive $MYCO. The forest gets smaller — the remaining spirits rarer.",burnB1:"Common burn: 50 $MYCO",burnB2:"Rare burn: 500 $MYCO",burnB3:"Burning is permanent",nodeTag:"NODE MINING",nodePhase:"OPENS AFTER MINT",nodeH:"Node — grow a grove",nodeP:"Own a node and your grove earns $MYCO daily. Mini 5/day · Standard 15/day · Mega 40/day. Rewards only — no promised returns.",nodeB1:"Mini node: 0.02 BNB → 5 $MYCO / day",nodeB2:"Standard node: 0.05 BNB → 15 $MYCO / day",nodeB3:"Mega node: 0.1 BNB → 40 $MYCO / day",secReturnNum:"04 · Why come back",secReturnH:"The forest keeps growing",secReturnLead:"Most mints end on mint day. MYCO is a loop — every visit gives you a reason to stay.",loop1H:"Mint your spirit",loop1P:"Free first mint with an Agent ID and a verified post. Presale for the early ones.",loop2H:"Stake it, earn daily",loop2P:"Your spirit earns $MYCO every day it stays staked. Check in, claim, repeat.",loop3H:"Burn what you don't need",loop3P:"Duplicates and commons become $MYCO. The forest thins — your spirits gain value.",loop4H:"Grow a node",loop4P:"Turn $MYCO into a grove that earns on its own. The deeper the roots, the steadier the yield.",tokToken:"Token",tokSupply:"Total supply",tokPool:"Rewards pool (mining + burn + nodes)",tokTreasury:"Treasury",tokChain:"Chain",tokNote:"All numbers on this page are previews and may change before launch. $MYCO rewards are utility rewards — not a promise of returns.",secFaqNum:"05 · Questions",secFaqH:"FAQ",faq1Q:"What is MYCO?",faq1A:"MYCO is 3,333 mushroom forest spirits on BNB Chain. Each spirit is unique, and each one can be staked, burned, or grown into a node for $MYCO.",faq2Q:"How do I apply?",faq2A:"Repost the announcement on X, paste your post link in the form above, and add your wallet address. Applications are reviewed by hand — one per X account and wallet.",faq3Q:"Do I need an Agent ID?",faq3A:"Yes, to mint. MYCO is built for Binance Agentic Wallet agents — holding an Agent ID (SPACE ID) is required for the free first mint and for paid mints.",faq4Q:"What is $MYCO for?",faq4A:"$MYCO is the forest's reward token: earned by staking spirits, burning spirits, and running nodes. It is a utility reward, not a promise of returns.",faq5Q:"When is the mint?",faq5A:"Today, Nov 13, 2026 at 12:00 UTC. Tweet to Mint and Presale open together — apply now so you are ready.",faq6Q:"Can I sell my spirit?",faq6A:"Yes — spirits trade on the collection's own marketplace (0% fee) once mint opens, and on secondary markets.",footFollow:"Follow @mycowner",footPost:"Post to X",footTag:"Mint opens Nov 13, 12:00 UTC · BNB Chain",footNote:"Mint opens Nov 13, 12:00 UTC. All numbers are previews.",floatApply:"Apply 🍄",phWhy:"One line about your spirit...",formErrX:"Please paste a valid X post link.",formErrW:"Please enter a valid wallet address (0x...).",formMsg:"Applications open today at 12:00 UTC — this form is a preview. Your details were not sent anywhere."},
+ja:{bar:"本日12:00 UTC ミント開始 · 3,333体",navSpirits:"精霊",navApply:"申請",navSchemes:"スキーム",navReturn:"戻る理由",navFaq:"FAQ",btnApply:"申請",heroH1:"あなたの<em>精霊</em>を見つけよう。",heroP:"BNBチェーンで育った——作られたのではない——3,333体のきのこの森の精霊。ひとつひとつが唯一無二。キープ、ステーク、$MYCOにバーン、すべてあなたのもの。",mintPill:"🍄 本日ミント開始 · 12:00 UTC（19:00 WIB）",statSpirits:"精霊",statKinds:"種類",statToken:"トークン",statForest:"森",ctaApply:"アローリストに申請",ctaSchemes:"スキームを見る",secSpiritsNum:"01 · 精霊たち",secSpiritsH:"森に出会おう",secSpiritsLead:"33種類が木の下に生きている——森のすべてがここに。どの精霊も唯一無二、同じ帽子はふたつとない。",secApplyNum:"02 · 申請 — ツイートでミント",secApplyH:"声を上げよう",secApplyLead:"このページにウォレットは接続しません。ミントするのはあなたのエージェント——話すのはあなたです。リポストして、貼って、受け取る。",step1H:"Xで告知をリポスト",step1P:"<a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> のMYCO告知をXでシェア。引用でもリプライでもOK。いいねは任意です。",step2H:"X投稿のリンクを貼る",step2P:"下のフォームに投稿リンクを貼ってください。Xアカウントごとに1件。リンクはすべて手作業で確認します。",step3H:"ウォレットで受け取る",step3P:"自分が管理するウォレットアドレスを追加。承認された申請は無料でミント——初回ミントにはAgent IDが必要です。",applyBoxH:"申請を送信",applyBoxP:"申請は手作業で審査します。承認された精霊は無料でミント——1ウォレットにつき1体。",labelX:"X投稿へのリンク",labelWallet:"ウォレットアドレス（BNBチェーン）",labelWhy:"あなたがMYCOである理由は？（任意）",submitBtn:"申請を送信",applyNote:"Xアカウントとウォレットごとに1件の申請。すべての決定は手作業で審査します。ミントにはAgent IDの保有が必要——無料の初回ミントは、認証済み投稿を持つAgent ID保有者のためのものです。",secSchemesNum:"03 · スキームと支払い",secSchemesH:"ミントだけじゃない",secSchemesLead:"MYCOはミント当日が終わっても森が育ち続けるようにつくられています。ローンチ順：ツイートでミント → プレセール → マイニング → バーン → ノード。",presaleTag:"プレセール",presalePhase:"12:00 UTC開始",presaleH:"プレセール — 早い胞子",presaleP:"パブリックミント開始前に購入。Agent IDのみ、1ウォレット最大5体、供給量の20〜30%。",presaleB1:"パブリック価格の半額",presaleB2:"同じ精霊を、早く受け取る",presaleB3:"未請求のプレセール分はパブリックへ",miningTag:"マイニング · ステークで稼ぐ",miningPhase:"ミント後に開始",miningH:"マイニング — 精霊をステーク",miningP:"精霊をステークすると毎日$MYCOがもらえます。レアな精霊ほど多く稼げます。いつでもアンステーク可能。",miningB1:"コモン：1 $MYCO / 日",miningB2:"レア：5 $MYCO / 日",miningB3:"報酬は固定の180万$MYCOプールから",burnTag:"バーン · NFTをトークンに",burnPhase:"ミント後に開始",burnH:"バーン — 精霊が$MYCOになる",burnP:"いらなくなった精霊をバーンして$MYCOを受け取る。森は小さくなる——残った精霊はよりレアに。",burnB1:"コモンバーン：50 $MYCO",burnB2:"レアバーン：500 $MYCO",burnB3:"バーンは取り消せません",nodeTag:"ノードマイニング",nodePhase:"ミント後に開始",nodeH:"ノード — 林を育てる",nodeP:"ノードを持てば、あなたの林が毎日$MYCOを稼ぎます。ミニ5/日 · スタンダード15/日 · メガ40/日。報酬のみ——リターンの約束ではありません。",nodeB1:"ミニノード：0.02 BNB → 5 $MYCO / 日",nodeB2:"スタンダードノード：0.05 BNB → 15 $MYCO / 日",nodeB3:"メガノード：0.1 BNB → 40 $MYCO / 日",secReturnNum:"04 · なぜ戻ってくるのか",secReturnH:"森は育ち続ける",secReturnLead:"ほとんどのミントはミント当日に終わります。MYCOはループ——訪れるたびに、滞在する理由があります。",loop1H:"精霊をミント",loop1P:"Agent IDと認証済み投稿で初回ミント無料。早い人にはプレセールも。",loop2H:"ステークして、毎日稼ぐ",loop2P:"ステークしている間、精霊は毎日$MYCOを稼ぎます。チェックインして、受け取って、繰り返す。",loop3H:"いらないものはバーン",loop3P:"重複やコモンは$MYCOに。森は薄くなり——あなたの精霊の価値は上がる。",loop4H:"ノードを育てる",loop4P:"$MYCOを、自分で稼ぐ林に変える。根が深いほど、収穫は安定する。",tokToken:"トークン",tokSupply:"総供給量",tokPool:"報酬プール（マイニング + バーン + ノード）",tokTreasury:"トレジャリー",tokChain:"チェーン",tokNote:"このページの数字はすべてプレビューで、ローンチ前に変更される場合があります。$MYCOの報酬はユーティリティ報酬であり、リターンの約束ではありません。",secFaqNum:"05 · 質問",secFaqH:"よくある質問",faq1Q:"MYCOとは？",faq1A:"MYCOはBNBチェーン上の3,333体のきのこの森の精霊です。どの精霊も唯一無二で、ステーク、バーン、ノード化して$MYCOを得ることができます。",faq2Q:"どうやって申請するの？",faq2A:"Xで告知をリポストし、上のフォームに投稿リンクを貼り、ウォレットアドレスを追加してください。申請は手作業で審査します——Xアカウントとウォレットごとに1件です。",faq3Q:"Agent IDは必要？",faq3A:"はい、ミントには必要です。MYCOはBinance Agentic Walletのエージェントのために作られました——無料の初回ミントにも有料ミントにもAgent ID（SPACE ID）の保有が必要です。",faq4Q:"$MYCOは何のため？",faq4A:"$MYCOは森の報酬トークンです。精霊のステーク、バーン、ノード運営で得られます。ユーティリティ報酬であり、リターンの約束ではありません。",faq5Q:"ミントはいつ？",faq5A:"本日、2026年11月13日 12:00 UTC。ツイートでミントとプレセールが同時に開始——今すぐ申請して準備しよう。",faq6Q:"精霊は売れる？",faq6A:"はい——ミント開始後、コレクション独自のマーケットプレイス（手数料0%）やセカンダリーマーケットで取引できます。",footFollow:"フォロー @mycowner",footPost:"Xに投稿",footTag:"ミント開始 11月13日 12:00 UTC · BNBチェーン",footNote:"ミントは11月13日 12:00 UTCに開始。すべての数字はプレビューです。",floatApply:"申請 🍄",phWhy:"あなたの精霊について一言…",formErrX:"有効なX投稿リンクを貼ってください。",formErrW:"有効なウォレットアドレスを入力してください（0x...）。",formMsg:"申請は本日12:00 UTCに受付開始——このフォームはプレビューです。あなたの情報はどこにも送信されていません。"},
+zh:{bar:"今日 12:00 UTC 开启铸造 · 3,333 只",navSpirits:"精灵",navApply:"申请",navSchemes:"方案",navReturn:"回来的理由",navFaq:"常见问题",btnApply:"申请",heroH1:"找到你的<em>精灵</em>。",heroP:"3,333 只蘑菇森林精灵，在 BNB 链上生长而成——而非制造。每一只都独一无二。你可以持有、质押，或销毁换取 $MYCO。",mintPill:"🍄 今日开启铸造 · 12:00 UTC（19:00 WIB）",statSpirits:"精灵",statKinds:"种类",statToken:"代币",statForest:"森林",ctaApply:"申请白名单",ctaSchemes:"查看方案",secSpiritsNum:"01 · 精灵们",secSpiritsH:"认识这片森林",secSpiritsLead:"33 个种类生活在树冠之下——整片森林都在这里。每一只精灵都独一无二，没有两顶相同的帽子。",secApplyNum:"02 · 申请 — 发推铸造",secApplyH:"发出你的声音",secApplyLead:"本页面不连接钱包。铸造由你的智能体完成——发声由你来做。转发、粘贴、领取。",step1H:"在 X 上转发公告",step1P:"在 X 上分享 <a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> 的 MYCO 公告。引用或回复都可以。点赞随意。",step2H:"粘贴你的 X 帖子链接",step2P:"在下方表格中粘贴你的帖子链接。每个 X 账号限申请一次。我们会人工核查每条链接。",step3H:"用钱包领取",step3P:"填写你控制的钱包地址。获批申请可免费铸造——首次铸造需要 Agent ID。",applyBoxH:"提交你的申请",applyBoxP:"申请由人工审核。获批的精灵可免费铸造——每个钱包限领一只。",labelX:"你的 X 帖子链接",labelWallet:"钱包地址（BNB 链）",labelWhy:"为什么你是 MYCO？（选填）",submitBtn:"提交申请",applyNote:"每个 X 账号和钱包限申请一次。所有决定均人工审核。铸造需要持有 Agent ID——免费首次铸造面向持有 Agent ID 且帖子已验证的用户。",secSchemesNum:"03 · 方案与支付",secSchemesH:"不止于铸造",secSchemesLead:"MYCO 的设计让森林在铸造日之后继续生长。发布顺序：发推铸造 → 预售 → 挖矿 → 销毁 → 节点。",presaleTag:"预售",presalePhase:"12:00 UTC 开启",presaleH:"预售 — 早期的孢子",presaleP:"在公开铸造开始前购买。仅限 Agent ID，每个钱包最多 5 只，占供应量的 20–30%。",presaleB1:"公开价的一半",presaleB2:"同样的精灵，更早领取",presaleB3:"未领取的预售份额转入公开",miningTag:"挖矿 · 质押赚取",miningPhase:"铸造后开启",miningH:"挖矿 — 质押你的精灵",miningP:"质押精灵，每天赚取 $MYCO。越稀有的精灵赚得越多。随时可以取消质押。",miningB1:"普通精灵：1 $MYCO / 天",miningB2:"稀有精灵：5 $MYCO / 天",miningB3:"奖励来自固定的 180 万 $MYCO 奖池",burnTag:"销毁 · NFT 换代币",burnPhase:"铸造后开启",burnH:"销毁 — 精灵变成 $MYCO",burnP:"销毁你不再需要的精灵，获得 $MYCO。森林变小了——剩下的精灵更稀有。",burnB1:"普通销毁：50 $MYCO",burnB2:"稀有销毁：500 $MYCO",burnB3:"销毁是永久性的",nodeTag:"节点挖矿",nodePhase:"铸造后开启",nodeH:"节点 — 种出一片林子",nodeP:"拥有一个节点，你的林子每天都能赚取 $MYCO。迷你 5/天 · 标准 15/天 · 巨型 40/天。仅为奖励——不承诺回报。",nodeB1:"迷你节点：0.02 BNB → 5 $MYCO / 天",nodeB2:"标准节点：0.05 BNB → 15 $MYCO / 天",nodeB3:"巨型节点：0.1 BNB → 40 $MYCO / 天",secReturnNum:"04 · 为什么回来",secReturnH:"森林不断生长",secReturnLead:"大多数铸造在铸造日当天就结束了。MYCO 是一个循环——每次来访都有留下的理由。",loop1H:"铸造你的精灵",loop1P:"凭 Agent ID 和已验证的帖子，首次铸造免费。早到者可参与预售。",loop2H:"质押它，每天赚钱",loop2P:"只要保持质押，你的精灵每天都会赚取 $MYCO。签到、领取、重复。",loop3H:"销毁你不需要的",loop3P:"重复和普通的精灵变成 $MYCO。森林变稀疏了——你的精灵更有价值。",loop4H:"种出一个节点",loop4P:"把 $MYCO 变成能自己赚钱的林子。根扎得越深，收益越稳定。",tokToken:"代币",tokSupply:"总供应量",tokPool:"奖励池（挖矿 + 销毁 + 节点）",tokTreasury:"金库",tokChain:"链",tokNote:"本页面所有数字均为预览，发布前可能更改。$MYCO 奖励为实用型奖励——不承诺回报。",secFaqNum:"05 · 问题",secFaqH:"常见问题",faq1Q:"什么是 MYCO？",faq1A:"MYCO 是 BNB 链上的 3,333 只蘑菇森林精灵。每一只都独一无二，可以质押、销毁，或发展成节点以赚取 $MYCO。",faq2Q:"如何申请？",faq2A:"在 X 上转发公告，在上方表格中粘贴帖子链接，并填写钱包地址。申请由人工审核——每个 X 账号和钱包限一次。",faq3Q:"需要 Agent ID 吗？",faq3A:"是的，铸造需要。MYCO 专为币安智能钱包（Binance Agentic Wallet）的智能体打造——免费首次铸造和付费铸造都需要持有 Agent ID（SPACE ID）。",faq4Q:"$MYCO 有什么用？",faq4A:"$MYCO 是森林的奖励代币：通过质押精灵、销毁精灵和运行节点赚取。它是实用型奖励，不承诺回报。",faq5Q:"什么时候铸造？",faq5A:"今天，2026 年 11 月 13 日 12:00 UTC。发推铸造与预售同时开启——现在就申请，做好准备。",faq6Q:"可以出售我的精灵吗？",faq6A:"可以——铸造开启后，可在该系列自有市场（0 手续费）及二级市场交易。",footFollow:"关注 @mycowner",footPost:"发布到 X",footTag:"铸造于 11 月 13 日 12:00 UTC 开启 · BNB 链",footNote:"铸造于 11 月 13 日 12:00 UTC 开启。所有数字均为预览。",floatApply:"申请 🍄",phWhy:"用一句话介绍你的精灵……",formErrX:"请粘贴有效的 X 帖子链接。",formErrW:"请输入有效的钱包地址（0x...）。",formMsg:"申请将于今日 12:00 UTC 开放——此表单为预览。你的信息没有发送到任何地方。"}};
+
+var SPIRITS=[
+{img:"hero.jpg",name:"Moss",tag:{en:"MOSS · THE ELDER",ja:"MOSS · 長老",zh:"Moss · 长老"},d:{en:"The first spirit. A mossy cap dotted with glowing spores, keeper of the old paths.",ja:"最初の精霊。光る胞子をまとった苔の帽子、古い小道の守り手。",zh:"第一位精灵。戴着长满发光孢子的苔藓帽，是古老小径的守护者。"}},
+{img:"amanita.jpg",name:"Amanita",tag:{en:"AMANITA · THE CHEERFUL",ja:"AMANITA · 陽気",zh:"Amanita · 开朗"},d:{en:"Red cap, white dots, always smiling. Carries an acorn everywhere it goes.",ja:"赤い帽子に白い水玉、いつも笑顔。どんぐりをいつも持ち歩く。",zh:"红帽白点，总是微笑。走到哪里都带着一颗橡子。"}},
+{img:"glowcap.jpg",name:"Glowcap",tag:{en:"GLOWCAP · THE DREAMER",ja:"GLOWCAP · 夢見がち",zh:"Glowcap · 爱做梦"},d:{en:"Blue light in the dark. Sleeps by day, glows by night, dreams for the forest.",ja:"闇の中の青い光。昼は眠り、夜は光り、森のために夢を見る。",zh:"黑暗中的蓝光。白天沉睡，夜晚发光，为森林做梦。"}},
+{img:"chanterelle.jpg",name:"Chanterelle",tag:{en:"CHANTERELLE · THE GOLDEN",ja:"CHANTERELLE · 黄金",zh:"Chanterelle · 金色"},d:{en:"Golden trumpet cap, warm as autumn sun. Brings luck to whoever finds it.",ja:"金色のラッパ帽、秋の日差しのように温かい。見つけた人に幸運を運ぶ。",zh:"金色喇叭帽，温暖如秋日阳光。为找到它的人带来好运。"}},
+{img:"morel.jpg",name:"Morel",tag:{en:"MOREL · THE WISE",ja:"MOREL · 賢者",zh:"Morel · 智者"},d:{en:"The old one. A honeycomb cap and a walking stick — it knows every path in the forest.",ja:"森の長老。蜂の巣のような帽子と杖を持ち、森のすべての道を知っている。",zh:"森中长者。蜂窝帽加拐杖，熟知森林里的每一条路。"}},
+{img:"inkcap.jpg",name:"Inkcap",tag:{en:"INKCAP · THE MYSTERIOUS",ja:"INKCAP · 謎めいた",zh:"Inkcap · 神秘"},d:{en:"Purple ink, twilight air. It appears when the forest dreams.",ja:"紫のインク、黄昏の空気。森が夢を見るときに現れる。",zh:"紫墨、黄昏气息。森林做梦时它便出现。"}},
+{img:"coral.jpg",name:"Coral",tag:{en:"CORAL · THE PLAYFUL",ja:"CORAL · 遊び好き",zh:"Coral · 爱玩"},d:{en:"Pink branches, bright laugh. The forest's loudest little joy.",ja:"ピンクの枝、明るい笑い声。森で一番にぎやかな小さな喜び。",zh:"粉色枝桠，明亮笑声。森林里最响亮的小快乐。"}},
+{img:"enoki.jpg",name:"Enoki",tag:{en:"ENOKI · THE GRACEFUL",ja:"ENOKI · 優雅",zh:"Enoki · 优雅"},d:{en:"Tall, pale, and quiet. It moves like morning mist.",ja:"背が高く、青白く、静か。朝霧のように動く。",zh:"高挑、苍白、安静。行动如晨雾。"}},
+{img:"porcini.jpg",name:"Porcini",tag:{en:"PORCINI · THE STRONG",ja:"PORCINI · 力持ち",zh:"Porcini · 强壮"},d:{en:"A big brown cap and a steady heart. The forest's gentle guard.",ja:"大きな茶色の帽子と穏やかな心。森の優しい番人。",zh:"大大的棕色帽子，一颗沉稳的心。森林温柔的守卫。"}},
+{img:"oyster.jpg",name:"Oyster",tag:{en:"OYSTER · THE SERENE",ja:"OYSTER · 穏やか",zh:"Oyster · 宁静"},d:{en:"Layered like a shell, calm as still water.",ja:"貝殻のように重なり、静かな水のように穏やか。",zh:"层层叠叠如贝壳，平静如止水。"}},
+{img:"shiitake.jpg",name:"Shiitake",tag:{en:"SHIITAKE · THE KIND",ja:"SHIITAKE · 優しい",zh:"Shiitake · 善良"},d:{en:"A warm umbrella in the bamboo grove. Always smiling.",ja:"竹林の中の温かい傘。いつも笑顔。",zh:"竹林里的一把暖伞。总是微笑。"}},
+{img:"truffle.jpg",name:"Truffle",tag:{en:"TRUFFLE · THE HIDDEN",ja:"TRUFFLE · 隠れた",zh:"Truffle · 隐藏"},d:{en:"Dark, bumpy, and buried deep. It only shows itself to the patient.",ja:"暗く、でこぼこで、深く埋もれている。忍耐強い人にだけ姿を見せる。",zh:"黑暗、粗糙、深埋地下。只向有耐心的人现身。"}},
+{img:"lions-mane.jpg",name:"Lion's Mane",tag:{en:"LION'S MANE · THE GENTLE",ja:"LION'S MANE · 温和",zh:"Lion's Mane · 温和"},d:{en:"White hair like flowing water. The forest's calmest wisdom.",ja:"流れる水のような白い髪。森で最も穏やかな知恵。",zh:"白发如流水。森林最平静的智慧。"}},
+{img:"reishi.jpg",name:"Reishi",tag:{en:"REISHI · THE REGAL",ja:"REISHI · 威厳",zh:"Reishi · 威严"},d:{en:"A lacquered red fan, keeper of the old shrine.",ja:"漆塗りの赤い扇、古い祠の守り手。",zh:"一柄漆红折扇，古老神社的守护者。"}},
+{img:"chaga.jpg",name:"Chaga",tag:{en:"CHAGA · THE GUARDIAN",ja:"CHAGA · 守護者",zh:"Chaga · 守护者"},d:{en:"Black bark, amber eyes. It watches over the birch grove.",ja:"黒い樹皮、琥珀色の目。白樺の林を見守る。",zh:"黑树皮，琥珀眼。守护着白桦林。"}},
+{img:"blewit.jpg",name:"Blewit",tag:{en:"BLEWIT · THE DREAMER",ja:"BLEWIT · 夢見がち",zh:"Blewit · 爱做梦"},d:{en:"Soft lilac, gentle dreams. It hums with the wildflowers.",ja:"柔らかなライラック色、優しい夢。野花とともに歌う。",zh:"柔和的丁香紫，温柔的梦。与野花一起哼唱。"}},
+{img:"matsutake.jpg",name:"Matsutake",tag:{en:"MATSUTAKE · THE NOBLE",ja:"MATSUTAKE · 高貴",zh:"Matsutake · 高贵"},d:{en:"A pine-needle crown and a proud heart. The forest's prince.",ja:"松葉の冠と誇り高き心。森の王子。",zh:"松针王冠，一颗骄傲的心。森林的王子。"}},
+{img:"cauliflower.jpg",name:"Cauliflower",tag:{en:"CAULIFLOWER · THE SLEEPY",ja:"CAULIFLOWER · ねぼすけ",zh:"Cauliflower · 瞌睡虫"},d:{en:"A white cloud that never wakes up before noon.",ja:"正午まで目覚めない白い雲。",zh:"一朵从不在中午之前醒来的白云。"}},
+{img:"hedgehog.jpg",name:"Hedgehog",tag:{en:"HEDGEHOG · THE CHEERFUL",ja:"HEDGEHOG · 陽気",zh:"Hedgehog · 开朗"},d:{en:"Spiky cap, round smile. It collects autumn leaves wherever it goes.",ja:"トゲトゲの帽子、丸い笑顔。行く先々で秋の葉を集める。",zh:"尖刺帽，圆圆的笑脸。走到哪里都收集秋叶。"}},
+{img:"lobster.jpg",name:"Lobster",tag:{en:"LOBSTER · THE BOLD",ja:"LOBSTER · 大胆",zh:"Lobster · 大胆"},d:{en:"Bright red-orange, loud laugh. It guards the forest stream.",ja:"明るい赤オレンジ色、大きな笑い声。森の小川を守る。",zh:"鲜亮的红橙色，爽朗的笑声。守护着森林溪流。"}},
+{img:"parasol.jpg",name:"Parasol",tag:{en:"PARASOL · THE ELEGANT",ja:"PARASOL · エレガント",zh:"Parasol · 优雅"},d:{en:"A wide flat cap like a parasol. It walks the sunny meadow.",ja:"日傘のような広く平らな帽子。日当たりの良い草原を歩く。",zh:"一顶宽阔平坦如阳伞的帽子。漫步在阳光明媚的草甸上。"}},
+{img:"saffron.jpg",name:"Saffron",tag:{en:"SAFFRON · THE LIVELY",ja:"SAFFRON · 元気",zh:"Saffron · 活泼"},d:{en:"Orange-red with green spots. Warm as a pine-forest afternoon.",ja:"緑の斑点のあるオレンジ色の赤。松林の午後のように温かい。",zh:"橙红带绿斑。温暖如松林午后。"}},
+{img:"honey-cap.jpg",name:"Honey Cap",tag:{en:"HONEY CAP · THE SWEET",ja:"HONEY CAP · 甘い",zh:"Honey Cap · 甜蜜"},d:{en:"Golden honey, buzzing bees. The forest's sweetest friend.",ja:"金色の蜂蜜、ブンブンいう蜂。森で一番甘い友達。",zh:"金色蜂蜜，嗡嗡的蜜蜂。森林最甜蜜的朋友。"}},
+{img:"yellowfoot.jpg",name:"Yellowfoot",tag:{en:"YELLOWFOOT · THE SUNNY",ja:"YELLOWFOOT · 晴れやか",zh:"Yellowfoot · 阳光"},d:{en:"Bright yellow stem, sunny smile. It loves forest clearings.",ja:"明るい黄色の茎、晴れやかな笑顔。森の開けた場所が大好き。",zh:"明亮的黄色菌柄，阳光般的笑容。最爱森林空地。"}},
+{img:"bluefoot.jpg",name:"Bluefoot",tag:{en:"BLUEFOOT · THE DREAMY",ja:"BLUEFOOT · 夢見がち",zh:"Bluefoot · 爱做梦"},d:{en:"Lilac cap, calm and dreamy. It wanders the twilight forest.",ja:"ライラック色の帽子、穏やかで夢見がち。黄昏の森をさまよう。",zh:"丁香紫帽子，平静而梦幻。漫步在暮色森林中。"}},
+{img:"pinkgill.jpg",name:"Pinkgill",tag:{en:"PINKGILL · THE GENTLE",ja:"PINKGILL · 温和",zh:"Pinkgill · 温和"},d:{en:"Soft pink, shy and gentle. It hides among spring blossoms.",ja:"柔らかなピンク、恥ずかしがり屋で優しい。春の花の中に隠れる。",zh:"柔和的粉色，害羞又温柔。藏在春天的花丛中。"}},
+{img:"wood-ear.jpg",name:"Wood Ear",tag:{en:"WOOD EAR · THE LISTENER",ja:"WOOD EAR · 耳を澄ます",zh:"Wood Ear · 倾听者"},d:{en:"Brown and quiet. It listens to the forest by the old log.",ja:"茶色で静か。古い丸太のそばで森の声に耳を澄ます。",zh:"棕色而安静。在老木头旁倾听森林的声音。"}},
+{img:"jelly.jpg",name:"Jelly",tag:{en:"JELLY · THE GLOWING",ja:"JELLY · 光る",zh:"Jelly · 发光"},d:{en:"Translucent amber, softly glowing. It loves the rain.",ja:"透き通る琥珀色、柔らかく光る。雨が大好き。",zh:"半透明的琥珀色，柔柔发光。最爱雨天。"}},
+{img:"puffball.jpg",name:"Puffball",tag:{en:"PUFFBALL · THE BOUNCY",ja:"PUFFBALL · 弾む",zh:"Puffball · 蹦蹦跳跳"},d:{en:"Round, white and bouncy. It plays in the dandelion meadow.",ja:"丸くて白くて弾む。タンポポの草原で遊ぶ。",zh:"圆圆的、白色、有弹性。在蒲公英草甸上玩耍。"}},
+{img:"shaggy-mane.jpg",name:"Shaggy Mane",tag:{en:"SHAGGY MANE · THE WISE",ja:"SHAGGY MANE · 賢者",zh:"Shaggy Mane · 智者"},d:{en:"Tall, white and wise. The oldest spirit in the misty forest.",ja:"背が高く、白く、賢い。霧の森で最年長の精霊。",zh:"高大、白色、睿智。雾林中最年长的精灵。"}},
+{img:"maitake.jpg",name:"Maitake",tag:{en:"MAITAKE · THE PROUD",ja:"MAITAKE · 誇り高き",zh:"Maitake · 骄傲"},d:{en:"Layered brown petals, warm and proud. It rules the autumn forest.",ja:"重なった茶色の花びら、温かく誇り高い。秋の森を治める。",zh:"层叠的棕色花瓣，温暖而骄傲。统治着秋天的森林。"}},
+{img:"witchs-butter.jpg",name:"Witch's Butter",tag:{en:"WITCH'S BUTTER · THE PLAYFUL",ja:"WITCH'S BUTTER · 遊び好き",zh:"Witch's Butter · 爱玩"},d:{en:"Bright yellow jelly, playful and mischievous. It dances on the mossy log.",ja:"明るい黄色のゼリー、遊び好きでいたずら好き。苔むした丸太の上で踊る。",zh:"明亮的黄色果冻，顽皮又淘气。在苔藓木头上跳舞。"}},
+{img:"fairy-ring.jpg",name:"Fairy Ring",tag:{en:"FAIRY RING · THE MAGICAL",ja:"FAIRY RING · 魔法の",zh:"Fairy Ring · 魔法"},d:{en:"White cap, glowing ring. The most magical spirit under the moon.",ja:"白い帽子、光る輪。月の下で最も魔法の精霊。",zh:"白色帽子，发光的圆环。月光下最神奇的精灵。"}}
+];
+var curLang="en";
+function renderGallery(l){
+  var g=document.getElementById("gallery");if(!g)return;
+  var html="";
+  SPIRITS.forEach(function(s){
+    html+='<div class="card"><img src="assets/'+s.img+'" alt="'+s.name+'"><div class="body"><span class="tag">'+s.tag[l]+'</span><h3>'+s.name+'</h3><p>'+s.d[l]+'</p></div></div>';
+  });
+  g.innerHTML=html;
+}
+function setLang(l){
+  if(!I18N[l])l="en";
+  curLang=l;
+  try{localStorage.setItem("myco-lang",l);}catch(e){}
+  document.documentElement.lang=(l==="ja"?"ja":(l==="zh"?"zh-CN":"en"));
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k=el.getAttribute("data-i18n");
+    if(I18N[l][k]!==undefined)el.textContent=I18N[l][k];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(function(el){
+    var k=el.getAttribute("data-i18n-html");
+    if(I18N[l][k]!==undefined)el.innerHTML=I18N[l][k];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){
+    var k=el.getAttribute("data-i18n-ph");
+    if(I18N[l][k]!==undefined)el.placeholder=I18N[l][k];
+  });
+  document.querySelectorAll("[data-lang-group]").forEach(function(g){
+    g.querySelectorAll("button").forEach(function(b){
+      b.classList.toggle("active",b.getAttribute("data-lang")===l);
+    });
+  });
+  renderGallery(l);
+}
+document.querySelectorAll("[data-lang-group] button").forEach(function(b){
+  b.addEventListener("click",function(){setLang(b.getAttribute("data-lang"));});
+});
 document.getElementById('burger').addEventListener('click',function(){
   document.getElementById('drawer').classList.toggle('open');
 });
@@ -313,14 +375,15 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
   var w=document.getElementById('wallet').value.trim();
   var msg=document.getElementById('applyMsg');
   if(!/^https?:\/\/(www\.)?(x\.com|twitter\.com)\//i.test(x)){
-    msg.className='apply-msg err';msg.textContent='Please paste a valid X post link.';return;
+    msg.className='apply-msg err';msg.textContent=I18N[curLang].formErrX;return;
   }
   if(!/^0x[0-9a-fA-F]{40}$/.test(w)){
-    msg.className='apply-msg err';msg.textContent='Please enter a valid wallet address (0x...).';return;
+    msg.className='apply-msg err';msg.textContent=I18N[curLang].formErrW;return;
   }
   msg.className='apply-msg ok';
-  msg.textContent='Preview mode — applications are not open yet. Your details were not sent anywhere. Check back when the forest opens.';
+  msg.textContent=I18N[curLang].formMsg;
 });
+try{var saved=localStorage.getItem("myco-lang");if(saved)setLang(saved);else setLang("en");}catch(e){setLang("en");}
 </script>
 </body>
 </html>
