@@ -113,6 +113,42 @@ h2{font-size:30px;color:var(--forest);margin:8px 0 4px}
 footer{border-top:1px solid var(--line);padding:36px 20px 90px;text-align:center;color:var(--ink2);font-size:14px}
 footer a{color:var(--forest)}
 .float-apply{position:fixed;right:16px;bottom:16px;z-index:60;box-shadow:0 10px 30px rgba(46,74,47,.4)}
+.mint-box{background:var(--deep);color:#e9f0dd;border-radius:24px;padding:28px 22px;margin-top:24px}
+.mint-box h3{font-size:22px;color:#fff}
+.mint-box p{font-size:14px;color:#b9cbb0;margin-top:6px}
+.mint-state{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:1px;border-radius:999px;padding:5px 12px;background:#5a4a1a;color:#f3e3a1}
+.mint-state.live{background:#2e5a2f;color:#d8e8b0}
+.mode-row{display:flex;gap:10px;margin-top:18px}
+.mode-row button{flex:1;background:#16281a;border:1px solid #4a6b45;color:#e9f0dd;border-radius:12px;padding:12px 8px;font-size:15px;font-family:Georgia,serif;cursor:pointer}
+.mode-row button.active{background:var(--gold);color:#241d00;border-color:var(--gold);font-weight:700}
+.qty-row{display:flex;align-items:center;gap:12px;margin-top:18px}
+.qty-row button{width:40px;height:40px;border-radius:50%;border:1px solid #4a6b45;background:#16281a;color:#fff;font-size:20px;cursor:pointer;flex:0 0 40px}
+.qty-row b{font-size:22px;color:#fff;min-width:30px;text-align:center}
+.mint-price{font-size:15px;color:#b9cbb0}
+.mint-price b{color:#fff;font-size:18px}
+.wallet-line{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:#b9cbb0;margin-top:14px;word-break:break-all}
+.mint-status{margin-top:14px;font-size:14px;display:none}
+.mint-status.show{display:block}
+.mint-status.err{color:#ffb4a2}
+.mint-status.ok{color:#d8e8b0}
+.mint-status a{color:#d8e8b0}
+.agent-box{margin-top:20px;border-top:1px solid #4a6b45;padding-top:16px}
+.agent-box label{display:block;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#b9cbb0;margin-bottom:6px}
+.codebox{background:#16281a;border:1px solid #4a6b45;border-radius:12px;padding:12px 14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:#e9f0dd;white-space:pre-wrap;word-break:break-word}
+.copy-btn{margin-top:10px;background:none;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:8px 18px;font-size:14px;cursor:pointer}
+.check-row{display:flex;gap:10px;margin-top:16px}
+.check-row input{flex:1;min-width:0;border:1px solid #4a6b45;background:#16281a;color:#fff;border-radius:12px;padding:12px 14px;font-size:14px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.check-row button{background:var(--gold);color:#241d00;border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer}
+.check-out{font-size:14px;margin-top:10px;display:none}
+.check-out.show{display:block}
+.check-out.ok{color:#d8e8b0}
+.check-out.err{color:#ffb4a2}
+.contracts-box{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;margin-top:24px}
+.contracts-box .row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.contracts-box .row:first-child{border-top:0}
+.contracts-box .row span{color:var(--ink2);flex:0 0 auto}
+.contracts-box .row code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--forest);word-break:break-all;text-align:right}
+.contracts-box .row b{color:var(--forest)}
 @media(max-width:639px){.float-apply{right:12px;bottom:12px;padding:9px 16px;font-size:14px}}
 @media(min-width:640px){
   nav{display:flex}
@@ -133,6 +169,7 @@ footer a{color:var(--forest)}
     <nav>
       <a href="#spirits" data-i18n="navSpirits">Spirits</a>
       <a href="#apply" data-i18n="navApply">Apply</a>
+      <a href="#mint" data-i18n="navMint">Mint</a>
       <a href="#schemes" data-i18n="navSchemes">Schemes</a>
       <a href="#return" data-i18n="navReturn">Why return</a>
       <a href="#faq" data-i18n="navFaq">FAQ</a>
@@ -142,12 +179,13 @@ footer a{color:var(--forest)}
       <button type="button" data-lang="ja">日本語</button>
       <button type="button" data-lang="zh">中文</button>
     </div>
-    <a class="btn" href="#apply" data-i18n="btnApply">Apply</a>
+    <a class="btn" href="#mint" data-i18n="btnMint">Mint</a>
     <button class="burger" id="burger" aria-label="Menu">☰</button>
   </div>
   <div class="drawer" id="drawer">
     <a href="#spirits" data-i18n="navSpirits">Spirits</a>
     <a href="#apply" data-i18n="navApply">Apply</a>
+    <a href="#mint" data-i18n="navMint">Mint</a>
     <a href="#schemes" data-i18n="navSchemes">Schemes</a>
     <a href="#return" data-i18n="navReturn">Why return</a>
     <a href="#faq" data-i18n="navFaq">FAQ</a>
@@ -172,7 +210,8 @@ footer a{color:var(--forest)}
     <div class="stat"><b>1</b><span data-i18n="statForest">Forest</span></div>
   </div>
   <div class="cta-row">
-    <a class="btn" href="#apply" data-i18n="ctaApply">Apply for allowlist</a>
+    <a class="btn" href="#mint" data-i18n="ctaMint">Mint now</a>
+    <a class="btn ghost" href="#apply" data-i18n="ctaApply">Apply for allowlist</a>
     <a class="btn ghost" href="#schemes" data-i18n="ctaSchemes">See the schemes</a>
   </div>
 </section>
@@ -210,8 +249,51 @@ footer a{color:var(--forest)}
   <p class="note" data-i18n="applyNote">One application per X account and wallet. All decisions are reviewed manually. Holding an Agent ID is required to mint — the free first mint is for Agent ID holders with a verified post.</p>
 </section>
 
+<section id="mint">
+  <span class="num" data-i18n="secMintNum">03 · Mint</span>
+  <h2 data-i18n="secMintH">Mint your spirit</h2>
+  <p class="lead" data-i18n="secMintLead">Contracts are deployed. Mint opens today at 12:00 UTC — free for allowlisted Agent ID holders, presale 0.0005 BNB after that.</p>
+  <p style="margin-top:14px"><span class="mint-state" id="mintState">MINT OPENS 12:00 UTC</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px"> <b id="mintedCount">0</b> / 3,333</span></p>
+  <div class="mint-box">
+    <h3 data-i18n="mintBoxH">Mint</h3>
+    <p data-i18n="mintBoxP">Connect your wallet. Free mint needs an Agent ID + allowlist approval. Paid mints need an Agent ID.</p>
+    <div class="wallet-line" id="walletLine"></div>
+    <div class="mode-row">
+      <button type="button" id="btnFree" class="active" data-i18n="modeFree">Free · Agent ID</button>
+      <button type="button" id="btnPaid" data-i18n="modePaid">Paid · Agent ID</button>
+    </div>
+    <div class="qty-row" id="qtyRow" style="display:none">
+      <button type="button" id="qtyMinus" aria-label="Less">−</button><b id="qtyNum">1</b><button type="button" id="qtyPlus" aria-label="More">+</button>
+      <span class="mint-price"><span data-i18n="totalLabel">Total</span> <b id="totalPrice">0.0005 BNB</b> <span id="pricePhase"></span></span>
+    </div>
+    <button type="button" class="btn" id="mintBtn" style="width:100%;margin-top:20px" data-i18n="mintBtnFree">Mint free spirit</button>
+    <p class="mint-status" id="mintStatus"></p>
+    <div class="agent-box">
+      <label data-i18n="promptLabel">Agent prompt — copy &amp; paste to your agent</label>
+      <div class="codebox" id="agentPrompt"></div>
+      <button type="button" class="copy-btn" id="copyPromptBtn" data-i18n="copyBtn">Copy prompt</button>
+    </div>
+    <div class="agent-box">
+      <label data-i18n="checkLabel">Agent ID checker</label>
+      <div class="check-row">
+        <input type="text" id="agentAddr" placeholder="0x...">
+        <button type="button" id="agentCheckBtn" data-i18n="checkBtn">Check</button>
+      </div>
+      <p class="check-out" id="agentCheckOut"></p>
+    </div>
+  </div>
+  <div class="contracts-box">
+    <div class="row"><span data-i18n="cNft">MYCO NFT</span><a href="https://bscscan.com/address/0x86229C12DB0F8F5816750Eb2A4ac6076FDb912d3" target="_blank" rel="noopener"><code>0x86229C12DB0F8F5816750Eb2A4ac6076FDb912d3</code></a></div>
+    <div class="row"><span data-i18n="cTok">$MYCO token</span><a href="https://bscscan.com/address/0x532fA96dB921955B374bb4Dc771E98AbbC644053" target="_blank" rel="noopener"><code>0x532fA96dB921955B374bb4Dc771E98AbbC644053</code></a></div>
+    <div class="row"><span data-i18n="cMkt">Marketplace</span><a href="https://bscscan.com/address/0xF9D67EAf237588B889F4bf1e823B8e2B9ddE038f" target="_blank" rel="noopener"><code>0xF9D67EAf237588B889F4bf1e823B8e2B9ddE038f</code></a></div>
+    <div class="row"><span data-i18n="cRoy">Royalty</span><b>5% → BAW</b></div>
+    <div class="row"><span data-i18n="cBase">Metadata</span><code>myco-one.vercel.app/metadata/</code></div>
+  </div>
+  <p class="note" data-i18n="mintNote">Mint opens 12:00 UTC, Nov 13 2026. Tweet to Mint is free for allowlisted wallets only — reply to the announcement on X to apply. Presale 0.0005 BNB, public 0.001 BNB.</p>
+</section>
+
 <section id="schemes">
-  <span class="num" data-i18n="secSchemesNum">03 · Schemes &amp; payments</span>
+  <span class="num" data-i18n="secSchemesNum">04 · Schemes &amp; payments</span>
   <h2 data-i18n="secSchemesH">More than a mint</h2>
   <p class="lead" data-i18n="secSchemesLead">MYCO is built so the forest keeps growing after mint day. Launch order: Tweet to Mint → Presale → Mining → Burn → Node.</p>
   <div class="cards" style="grid-template-columns:1fr">
@@ -247,7 +329,7 @@ footer a{color:var(--forest)}
 </section>
 
 <section id="return">
-  <span class="num" data-i18n="secReturnNum">04 · Why come back</span>
+  <span class="num" data-i18n="secReturnNum">05 · Why come back</span>
   <h2 data-i18n="secReturnH">The forest keeps growing</h2>
   <p class="lead" data-i18n="secReturnLead">Most mints end on mint day. MYCO is a loop — every visit gives you a reason to stay.</p>
   <div class="loop">
@@ -267,7 +349,7 @@ footer a{color:var(--forest)}
 </section>
 
 <section id="faq">
-  <span class="num" data-i18n="secFaqNum">05 · Questions</span>
+  <span class="num" data-i18n="secFaqNum">06 · Questions</span>
   <h2 data-i18n="secFaqH">FAQ</h2>
   <div style="margin-top:20px">
     <details class="faq-item"><summary><span data-i18n="faq1Q">What is MYCO?</span><span class="chev">▾</span></summary><div class="faq-a" data-i18n="faq1A">MYCO is 3,333 mushroom forest spirits on BNB Chain. Each spirit is unique, and each one can be staked, burned, or grown into a node for $MYCO.</div></details>
@@ -284,14 +366,13 @@ footer a{color:var(--forest)}
   <p style="margin-top:8px"><a href="https://x.com/mycowner" target="_blank" rel="noopener" data-i18n="footFollow">Follow @mycowner</a> · <a href="https://x.com/intent/post?text=MYCO%20%E2%80%94%20Find%20your%20spirit.%203%2C333%20mushroom%20forest%20spirits%20on%20BNB%20Chain.%20%40mycowner" target="_blank" rel="noopener" data-i18n="footPost">Post to X</a> · <span data-i18n="footTag">Mint opens Nov 13, 12:00 UTC · BNB Chain</span></p>
   <p style="margin-top:8px;font-size:12px" data-i18n="footNote">Mint opens Nov 13, 12:00 UTC. All numbers are previews.</p>
 </footer>
-<a class="btn float-apply" href="#apply" data-i18n="floatApply">Apply 🍄</a>
+<a class="btn float-apply" href="#mint" data-i18n="floatMint">Mint 🍄</a>
 
 <script>
 var I18N={
-en:{bar:"MINT OPENS TODAY 12:00 UTC · 3,333 SPIRITS",navSpirits:"Spirits",navApply:"Apply",navSchemes:"Schemes",navReturn:"Why return",navFaq:"FAQ",btnApply:"Apply",heroH1:"Find your <em>spirit.</em>",heroP:"3,333 mushroom forest spirits, grown — not made — on BNB Chain. Each one unique. Each one yours to keep, stake, or burn for $MYCO.",mintPill:"🍄 Mint opens today · 12:00 UTC (19:00 WIB)",statSpirits:"Spirits",statKinds:"Kinds",statToken:"Token",statForest:"Forest",ctaApply:"Apply for allowlist",ctaSchemes:"See the schemes",secSpiritsNum:"01 · The spirits",secSpiritsH:"Meet the forest",secSpiritsLead:"Thirty-three kinds live under the canopy — the full forest is here. Every spirit is one of one — no two caps alike.",secApplyNum:"02 · Apply — Tweet to Mint",secApplyH:"Make some noise",secApplyLead:"No wallet connects to this page. Your agent does the minting — you do the talking. Repost, paste, claim.",step1H:"Repost the announcement on X",step1P:"Share the MYCO announcement from <a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> on X. Quote it or reply — either counts. Likes are optional.",step2H:"Paste your X post link",step2P:"Drop the link to your post in the form below. One application per X account. We check every link by hand.",step3H:"Claim with your wallet",step3P:"Add the wallet address you control. Approved applications mint free — first mint needs an Agent ID.",applyBoxH:"Claim your application",applyBoxP:"Applications are reviewed manually. Approved spirits mint free — one per wallet.",labelX:"Link to your X post",labelWallet:"Wallet address (BNB Chain)",labelWhy:"What makes you MYCO? (optional)",submitBtn:"Submit application",applyNote:"One application per X account and wallet. All decisions are reviewed manually. Holding an Agent ID is required to mint — the free first mint is for Agent ID holders with a verified post.",secSchemesNum:"03 · Schemes & payments",secSchemesH:"More than a mint",secSchemesLead:"MYCO is built so the forest keeps growing after mint day. Launch order: Tweet to Mint → Presale → Mining → Burn → Node.",presaleTag:"PRESALE",presalePhase:"OPENS 12:00 UTC",presaleH:"Presale — early spores",presaleP:"Buy before the public mint opens. Agent ID only, max 5 per wallet, 20–30% of supply.",presaleB1:"Half the public price",presaleB2:"Same spirit, earlier claim",presaleB3:"Unclaimed presale supply goes public",miningTag:"MINING · STAKE TO EARN",miningPhase:"OPENS AFTER MINT",miningH:"Mining — stake your spirit",miningP:"Stake a spirit and it earns $MYCO every day. Rarer spirits earn more. Unstake anytime.",miningB1:"Common spirits: 1 $MYCO / day",miningB2:"Rare spirits: 5 $MYCO / day",miningB3:"Rewards come from a fixed 1.8M $MYCO pool",burnTag:"BURN · NFT TO TOKEN",burnPhase:"OPENS AFTER MINT",burnH:"Burn — spirits become $MYCO",burnP:"Burn a spirit you no longer want and receive $MYCO. The forest gets smaller — the remaining spirits rarer.",burnB1:"Common burn: 50 $MYCO",burnB2:"Rare burn: 500 $MYCO",burnB3:"Burning is permanent",nodeTag:"NODE MINING",nodePhase:"OPENS AFTER MINT",nodeH:"Node — grow a grove",nodeP:"Own a node and your grove earns $MYCO daily. Mini 5/day · Standard 15/day · Mega 40/day. Rewards only — no promised returns.",nodeB1:"Mini node: 0.02 BNB → 5 $MYCO / day",nodeB2:"Standard node: 0.05 BNB → 15 $MYCO / day",nodeB3:"Mega node: 0.1 BNB → 40 $MYCO / day",secReturnNum:"04 · Why come back",secReturnH:"The forest keeps growing",secReturnLead:"Most mints end on mint day. MYCO is a loop — every visit gives you a reason to stay.",loop1H:"Mint your spirit",loop1P:"Free first mint with an Agent ID and a verified post. Presale for the early ones.",loop2H:"Stake it, earn daily",loop2P:"Your spirit earns $MYCO every day it stays staked. Check in, claim, repeat.",loop3H:"Burn what you don't need",loop3P:"Duplicates and commons become $MYCO. The forest thins — your spirits gain value.",loop4H:"Grow a node",loop4P:"Turn $MYCO into a grove that earns on its own. The deeper the roots, the steadier the yield.",tokToken:"Token",tokSupply:"Total supply",tokPool:"Rewards pool (mining + burn + nodes)",tokTreasury:"Treasury",tokChain:"Chain",tokNote:"All numbers on this page are previews and may change before launch. $MYCO rewards are utility rewards — not a promise of returns.",secFaqNum:"05 · Questions",secFaqH:"FAQ",faq1Q:"What is MYCO?",faq1A:"MYCO is 3,333 mushroom forest spirits on BNB Chain. Each spirit is unique, and each one can be staked, burned, or grown into a node for $MYCO.",faq2Q:"How do I apply?",faq2A:"Repost the announcement on X, paste your post link in the form above, and add your wallet address. Applications are reviewed by hand — one per X account and wallet.",faq3Q:"Do I need an Agent ID?",faq3A:"Yes, to mint. MYCO is built for Binance Agentic Wallet agents — holding an Agent ID (SPACE ID) is required for the free first mint and for paid mints.",faq4Q:"What is $MYCO for?",faq4A:"$MYCO is the forest's reward token: earned by staking spirits, burning spirits, and running nodes. It is a utility reward, not a promise of returns.",faq5Q:"When is the mint?",faq5A:"Today, Nov 13, 2026 at 12:00 UTC. Tweet to Mint and Presale open together — apply now so you are ready.",faq6Q:"Can I sell my spirit?",faq6A:"Yes — spirits trade on the collection's own marketplace (0% fee) once mint opens, and on secondary markets.",footFollow:"Follow @mycowner",footPost:"Post to X",footTagline:"MYCO — Find your spirit. 🍄",footTag:"Mint opens Nov 13, 12:00 UTC · BNB Chain",footNote:"Mint opens Nov 13, 12:00 UTC. All numbers are previews.",floatApply:"Apply 🍄",phWhy:"One line about your spirit...",formErrX:"Please paste a valid X post link.",formErrW:"Please enter a valid wallet address (0x...).",formMsg:"Applications open today at 12:00 UTC — this form is a preview. Your details were not sent anywhere."},
-ja:{bar:"本日12:00 UTC ミント開始 · 3,333体",navSpirits:"精霊",navApply:"申請",navSchemes:"スキーム",navReturn:"戻る理由",navFaq:"FAQ",btnApply:"申請",heroH1:"あなたの<em>精霊</em>を見つけよう。",heroP:"BNBチェーンで育った——作られたのではない——3,333体のきのこの森の精霊。ひとつひとつが唯一無二。キープ、ステーク、$MYCOにバーン、すべてあなたのもの。",mintPill:"🍄 本日ミント開始 · 12:00 UTC（19:00 WIB）",statSpirits:"精霊",statKinds:"種類",statToken:"トークン",statForest:"森",ctaApply:"アローリストに申請",ctaSchemes:"スキームを見る",secSpiritsNum:"01 · 精霊たち",secSpiritsH:"森に出会おう",secSpiritsLead:"33種類が木の下に生きている——森のすべてがここに。どの精霊も唯一無二、同じ帽子はふたつとない。",secApplyNum:"02 · 申請 — ツイートでミント",secApplyH:"声を上げよう",secApplyLead:"このページにウォレットは接続しません。ミントするのはあなたのエージェント——話すのはあなたです。リポストして、貼って、受け取る。",step1H:"Xで告知をリポスト",step1P:"<a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> のMYCO告知をXでシェア。引用でもリプライでもOK。いいねは任意です。",step2H:"X投稿のリンクを貼る",step2P:"下のフォームに投稿リンクを貼ってください。Xアカウントごとに1件。リンクはすべて手作業で確認します。",step3H:"ウォレットで受け取る",step3P:"自分が管理するウォレットアドレスを追加。承認された申請は無料でミント——初回ミントにはAgent IDが必要です。",applyBoxH:"申請を送信",applyBoxP:"申請は手作業で審査します。承認された精霊は無料でミント——1ウォレットにつき1体。",labelX:"X投稿へのリンク",labelWallet:"ウォレットアドレス（BNBチェーン）",labelWhy:"あなたがMYCOである理由は？（任意）",submitBtn:"申請を送信",applyNote:"Xアカウントとウォレットごとに1件の申請。すべての決定は手作業で審査します。ミントにはAgent IDの保有が必要——無料の初回ミントは、認証済み投稿を持つAgent ID保有者のためのものです。",secSchemesNum:"03 · スキームと支払い",secSchemesH:"ミントだけじゃない",secSchemesLead:"MYCOはミント当日が終わっても森が育ち続けるようにつくられています。ローンチ順：ツイートでミント → プレセール → マイニング → バーン → ノード。",presaleTag:"プレセール",presalePhase:"12:00 UTC開始",presaleH:"プレセール — 早い胞子",presaleP:"パブリックミント開始前に購入。Agent IDのみ、1ウォレット最大5体、供給量の20〜30%。",presaleB1:"パブリック価格の半額",presaleB2:"同じ精霊を、早く受け取る",presaleB3:"未請求のプレセール分はパブリックへ",miningTag:"マイニング · ステークで稼ぐ",miningPhase:"ミント後に開始",miningH:"マイニング — 精霊をステーク",miningP:"精霊をステークすると毎日$MYCOがもらえます。レアな精霊ほど多く稼げます。いつでもアンステーク可能。",miningB1:"コモン：1 $MYCO / 日",miningB2:"レア：5 $MYCO / 日",miningB3:"報酬は固定の180万$MYCOプールから",burnTag:"バーン · NFTをトークンに",burnPhase:"ミント後に開始",burnH:"バーン — 精霊が$MYCOになる",burnP:"いらなくなった精霊をバーンして$MYCOを受け取る。森は小さくなる——残った精霊はよりレアに。",burnB1:"コモンバーン：50 $MYCO",burnB2:"レアバーン：500 $MYCO",burnB3:"バーンは取り消せません",nodeTag:"ノードマイニング",nodePhase:"ミント後に開始",nodeH:"ノード — 林を育てる",nodeP:"ノードを持てば、あなたの林が毎日$MYCOを稼ぎます。ミニ5/日 · スタンダード15/日 · メガ40/日。報酬のみ——リターンの約束ではありません。",nodeB1:"ミニノード：0.02 BNB → 5 $MYCO / 日",nodeB2:"スタンダードノード：0.05 BNB → 15 $MYCO / 日",nodeB3:"メガノード：0.1 BNB → 40 $MYCO / 日",secReturnNum:"04 · なぜ戻ってくるのか",secReturnH:"森は育ち続ける",secReturnLead:"ほとんどのミントはミント当日に終わります。MYCOはループ——訪れるたびに、滞在する理由があります。",loop1H:"精霊をミント",loop1P:"Agent IDと認証済み投稿で初回ミント無料。早い人にはプレセールも。",loop2H:"ステークして、毎日稼ぐ",loop2P:"ステークしている間、精霊は毎日$MYCOを稼ぎます。チェックインして、受け取って、繰り返す。",loop3H:"いらないものはバーン",loop3P:"重複やコモンは$MYCOに。森は薄くなり——あなたの精霊の価値は上がる。",loop4H:"ノードを育てる",loop4P:"$MYCOを、自分で稼ぐ林に変える。根が深いほど、収穫は安定する。",tokToken:"トークン",tokSupply:"総供給量",tokPool:"報酬プール（マイニング + バーン + ノード）",tokTreasury:"トレジャリー",tokChain:"チェーン",tokNote:"このページの数字はすべてプレビューで、ローンチ前に変更される場合があります。$MYCOの報酬はユーティリティ報酬であり、リターンの約束ではありません。",secFaqNum:"05 · 質問",secFaqH:"よくある質問",faq1Q:"MYCOとは？",faq1A:"MYCOはBNBチェーン上の3,333体のきのこの森の精霊です。どの精霊も唯一無二で、ステーク、バーン、ノード化して$MYCOを得ることができます。",faq2Q:"どうやって申請するの？",faq2A:"Xで告知をリポストし、上のフォームに投稿リンクを貼り、ウォレットアドレスを追加してください。申請は手作業で審査します——Xアカウントとウォレットごとに1件です。",faq3Q:"Agent IDは必要？",faq3A:"はい、ミントには必要です。MYCOはBinance Agentic Walletのエージェントのために作られました——無料の初回ミントにも有料ミントにもAgent ID（SPACE ID）の保有が必要です。",faq4Q:"$MYCOは何のため？",faq4A:"$MYCOは森の報酬トークンです。精霊のステーク、バーン、ノード運営で得られます。ユーティリティ報酬であり、リターンの約束ではありません。",faq5Q:"ミントはいつ？",faq5A:"本日、2026年11月13日 12:00 UTC。ツイートでミントとプレセールが同時に開始——今すぐ申請して準備しよう。",faq6Q:"精霊は売れる？",faq6A:"はい——ミント開始後、コレクション独自のマーケットプレイス（手数料0%）やセカンダリーマーケットで取引できます。",footFollow:"フォロー @mycowner",footPost:"Xに投稿",footTagline:"MYCO — あなたの精霊を見つけよう。🍄",footTag:"ミント開始 11月13日 12:00 UTC · BNBチェーン",footNote:"ミントは11月13日 12:00 UTCに開始。すべての数字はプレビューです。",floatApply:"申請 🍄",phWhy:"あなたの精霊について一言…",formErrX:"有効なX投稿リンクを貼ってください。",formErrW:"有効なウォレットアドレスを入力してください（0x...）。",formMsg:"申請は本日12:00 UTCに受付開始——このフォームはプレビューです。あなたの情報はどこにも送信されていません。"},
-zh:{bar:"今日 12:00 UTC 开启铸造 · 3,333 只",navSpirits:"精灵",navApply:"申请",navSchemes:"方案",navReturn:"回来的理由",navFaq:"常见问题",btnApply:"申请",heroH1:"找到你的<em>精灵</em>。",heroP:"3,333 只蘑菇森林精灵，在 BNB 链上生长而成——而非制造。每一只都独一无二。你可以持有、质押，或销毁换取 $MYCO。",mintPill:"🍄 今日开启铸造 · 12:00 UTC（19:00 WIB）",statSpirits:"精灵",statKinds:"种类",statToken:"代币",statForest:"森林",ctaApply:"申请白名单",ctaSchemes:"查看方案",secSpiritsNum:"01 · 精灵们",secSpiritsH:"认识这片森林",secSpiritsLead:"33 个种类生活在树冠之下——整片森林都在这里。每一只精灵都独一无二，没有两顶相同的帽子。",secApplyNum:"02 · 申请 — 发推铸造",secApplyH:"发出你的声音",secApplyLead:"本页面不连接钱包。铸造由你的智能体完成——发声由你来做。转发、粘贴、领取。",step1H:"在 X 上转发公告",step1P:"在 X 上分享 <a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> 的 MYCO 公告。引用或回复都可以。点赞随意。",step2H:"粘贴你的 X 帖子链接",step2P:"在下方表格中粘贴你的帖子链接。每个 X 账号限申请一次。我们会人工核查每条链接。",step3H:"用钱包领取",step3P:"填写你控制的钱包地址。获批申请可免费铸造——首次铸造需要 Agent ID。",applyBoxH:"提交你的申请",applyBoxP:"申请由人工审核。获批的精灵可免费铸造——每个钱包限领一只。",labelX:"你的 X 帖子链接",labelWallet:"钱包地址（BNB 链）",labelWhy:"为什么你是 MYCO？（选填）",submitBtn:"提交申请",applyNote:"每个 X 账号和钱包限申请一次。所有决定均人工审核。铸造需要持有 Agent ID——免费首次铸造面向持有 Agent ID 且帖子已验证的用户。",secSchemesNum:"03 · 方案与支付",secSchemesH:"不止于铸造",secSchemesLead:"MYCO 的设计让森林在铸造日之后继续生长。发布顺序：发推铸造 → 预售 → 挖矿 → 销毁 → 节点。",presaleTag:"预售",presalePhase:"12:00 UTC 开启",presaleH:"预售 — 早期的孢子",presaleP:"在公开铸造开始前购买。仅限 Agent ID，每个钱包最多 5 只，占供应量的 20–30%。",presaleB1:"公开价的一半",presaleB2:"同样的精灵，更早领取",presaleB3:"未领取的预售份额转入公开",miningTag:"挖矿 · 质押赚取",miningPhase:"铸造后开启",miningH:"挖矿 — 质押你的精灵",miningP:"质押精灵，每天赚取 $MYCO。越稀有的精灵赚得越多。随时可以取消质押。",miningB1:"普通精灵：1 $MYCO / 天",miningB2:"稀有精灵：5 $MYCO / 天",miningB3:"奖励来自固定的 180 万 $MYCO 奖池",burnTag:"销毁 · NFT 换代币",burnPhase:"铸造后开启",burnH:"销毁 — 精灵变成 $MYCO",burnP:"销毁你不再需要的精灵，获得 $MYCO。森林变小了——剩下的精灵更稀有。",burnB1:"普通销毁：50 $MYCO",burnB2:"稀有销毁：500 $MYCO",burnB3:"销毁是永久性的",nodeTag:"节点挖矿",nodePhase:"铸造后开启",nodeH:"节点 — 种出一片林子",nodeP:"拥有一个节点，你的林子每天都能赚取 $MYCO。迷你 5/天 · 标准 15/天 · 巨型 40/天。仅为奖励——不承诺回报。",nodeB1:"迷你节点：0.02 BNB → 5 $MYCO / 天",nodeB2:"标准节点：0.05 BNB → 15 $MYCO / 天",nodeB3:"巨型节点：0.1 BNB → 40 $MYCO / 天",secReturnNum:"04 · 为什么回来",secReturnH:"森林不断生长",secReturnLead:"大多数铸造在铸造日当天就结束了。MYCO 是一个循环——每次来访都有留下的理由。",loop1H:"铸造你的精灵",loop1P:"凭 Agent ID 和已验证的帖子，首次铸造免费。早到者可参与预售。",loop2H:"质押它，每天赚钱",loop2P:"只要保持质押，你的精灵每天都会赚取 $MYCO。签到、领取、重复。",loop3H:"销毁你不需要的",loop3P:"重复和普通的精灵变成 $MYCO。森林变稀疏了——你的精灵更有价值。",loop4H:"种出一个节点",loop4P:"把 $MYCO 变成能自己赚钱的林子。根扎得越深，收益越稳定。",tokToken:"代币",tokSupply:"总供应量",tokPool:"奖励池（挖矿 + 销毁 + 节点）",tokTreasury:"金库",tokChain:"链",tokNote:"本页面所有数字均为预览，发布前可能更改。$MYCO 奖励为实用型奖励——不承诺回报。",secFaqNum:"05 · 问题",secFaqH:"常见问题",faq1Q:"什么是 MYCO？",faq1A:"MYCO 是 BNB 链上的 3,333 只蘑菇森林精灵。每一只都独一无二，可以质押、销毁，或发展成节点以赚取 $MYCO。",faq2Q:"如何申请？",faq2A:"在 X 上转发公告，在上方表格中粘贴帖子链接，并填写钱包地址。申请由人工审核——每个 X 账号和钱包限一次。",faq3Q:"需要 Agent ID 吗？",faq3A:"是的，铸造需要。MYCO 专为币安智能钱包（Binance Agentic Wallet）的智能体打造——免费首次铸造和付费铸造都需要持有 Agent ID（SPACE ID）。",faq4Q:"$MYCO 有什么用？",faq4A:"$MYCO 是森林的奖励代币：通过质押精灵、销毁精灵和运行节点赚取。它是实用型奖励，不承诺回报。",faq5Q:"什么时候铸造？",faq5A:"今天，2026 年 11 月 13 日 12:00 UTC。发推铸造与预售同时开启——现在就申请，做好准备。",faq6Q:"可以出售我的精灵吗？",faq6A:"可以——铸造开启后，可在该系列自有市场（0 手续费）及二级市场交易。",footFollow:"关注 @mycowner",footPost:"发布到 X",footTagline:"MYCO — 找到你的精灵。🍄",footTag:"铸造于 11 月 13 日 12:00 UTC 开启 · BNB 链",footNote:"铸造于 11 月 13 日 12:00 UTC 开启。所有数字均为预览。",floatApply:"申请 🍄",phWhy:"用一句话介绍你的精灵……",formErrX:"请粘贴有效的 X 帖子链接。",formErrW:"请输入有效的钱包地址（0x...）。",formMsg:"申请将于今日 12:00 UTC 开放——此表单为预览。你的信息没有发送到任何地方。"}};
-
+en:{bar:"MINT OPENS TODAY 12:00 UTC · 3,333 SPIRITS",navSpirits:"Spirits",navApply:"Apply",navSchemes:"Schemes",navReturn:"Why return",navFaq:"FAQ",btnApply:"Apply",heroH1:"Find your <em>spirit.</em>",heroP:"3,333 mushroom forest spirits, grown — not made — on BNB Chain. Each one unique. Each one yours to keep, stake, or burn for $MYCO.",mintPill:"🍄 Mint opens today · 12:00 UTC (19:00 WIB)",statSpirits:"Spirits",statKinds:"Kinds",statToken:"Token",statForest:"Forest",ctaApply:"Apply for allowlist",ctaSchemes:"See the schemes",secSpiritsNum:"01 · The spirits",secSpiritsH:"Meet the forest",secSpiritsLead:"Thirty-three kinds live under the canopy — the full forest is here. Every spirit is one of one — no two caps alike.",secApplyNum:"02 · Apply — Tweet to Mint",secApplyH:"Make some noise",secApplyLead:"No wallet connects to this page. Your agent does the minting — you do the talking. Repost, paste, claim.",step1H:"Repost the announcement on X",step1P:"Share the MYCO announcement from <a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> on X. Quote it or reply — either counts. Likes are optional.",step2H:"Paste your X post link",step2P:"Drop the link to your post in the form below. One application per X account. We check every link by hand.",step3H:"Claim with your wallet",step3P:"Add the wallet address you control. Approved applications mint free — first mint needs an Agent ID.",applyBoxH:"Claim your application",applyBoxP:"Applications are reviewed manually. Approved spirits mint free — one per wallet.",labelX:"Link to your X post",labelWallet:"Wallet address (BNB Chain)",labelWhy:"What makes you MYCO? (optional)",submitBtn:"Submit application",applyNote:"One application per X account and wallet. All decisions are reviewed manually. Holding an Agent ID is required to mint — the free first mint is for Agent ID holders with a verified post.",secSchemesNum:"04 · Schemes & payments",secSchemesH:"More than a mint",secSchemesLead:"MYCO is built so the forest keeps growing after mint day. Launch order: Tweet to Mint → Presale → Mining → Burn → Node.",presaleTag:"PRESALE",presalePhase:"OPENS 12:00 UTC",presaleH:"Presale — early spores",presaleP:"Buy before the public mint opens. Agent ID only, max 5 per wallet, 20–30% of supply.",presaleB1:"Half the public price",presaleB2:"Same spirit, earlier claim",presaleB3:"Unclaimed presale supply goes public",miningTag:"MINING · STAKE TO EARN",miningPhase:"OPENS AFTER MINT",miningH:"Mining — stake your spirit",miningP:"Stake a spirit and it earns $MYCO every day. Rarer spirits earn more. Unstake anytime.",miningB1:"Common spirits: 1 $MYCO / day",miningB2:"Rare spirits: 5 $MYCO / day",miningB3:"Rewards come from a fixed 1.8M $MYCO pool",burnTag:"BURN · NFT TO TOKEN",burnPhase:"OPENS AFTER MINT",burnH:"Burn — spirits become $MYCO",burnP:"Burn a spirit you no longer want and receive $MYCO. The forest gets smaller — the remaining spirits rarer.",burnB1:"Common burn: 50 $MYCO",burnB2:"Rare burn: 500 $MYCO",burnB3:"Burning is permanent",nodeTag:"NODE MINING",nodePhase:"OPENS AFTER MINT",nodeH:"Node — grow a grove",nodeP:"Own a node and your grove earns $MYCO daily. Mini 5/day · Standard 15/day · Mega 40/day. Rewards only — no promised returns.",nodeB1:"Mini node: 0.02 BNB → 5 $MYCO / day",nodeB2:"Standard node: 0.05 BNB → 15 $MYCO / day",nodeB3:"Mega node: 0.1 BNB → 40 $MYCO / day",secReturnNum:"05 · Why come back",secReturnH:"The forest keeps growing",secReturnLead:"Most mints end on mint day. MYCO is a loop — every visit gives you a reason to stay.",loop1H:"Mint your spirit",loop1P:"Free first mint with an Agent ID and a verified post. Presale for the early ones.",loop2H:"Stake it, earn daily",loop2P:"Your spirit earns $MYCO every day it stays staked. Check in, claim, repeat.",loop3H:"Burn what you don't need",loop3P:"Duplicates and commons become $MYCO. The forest thins — your spirits gain value.",loop4H:"Grow a node",loop4P:"Turn $MYCO into a grove that earns on its own. The deeper the roots, the steadier the yield.",tokToken:"Token",tokSupply:"Total supply",tokPool:"Rewards pool (mining + burn + nodes)",tokTreasury:"Treasury",tokChain:"Chain",tokNote:"All numbers on this page are previews and may change before launch. $MYCO rewards are utility rewards — not a promise of returns.",secFaqNum:"06 · Questions",secFaqH:"FAQ",faq1Q:"What is MYCO?",faq1A:"MYCO is 3,333 mushroom forest spirits on BNB Chain. Each spirit is unique, and each one can be staked, burned, or grown into a node for $MYCO.",faq2Q:"How do I apply?",faq2A:"Repost the announcement on X, paste your post link in the form above, and add your wallet address. Applications are reviewed by hand — one per X account and wallet.",faq3Q:"Do I need an Agent ID?",faq3A:"Yes, to mint. MYCO is built for Binance Agentic Wallet agents — holding an Agent ID (SPACE ID) is required for the free first mint and for paid mints.",faq4Q:"What is $MYCO for?",faq4A:"$MYCO is the forest's reward token: earned by staking spirits, burning spirits, and running nodes. It is a utility reward, not a promise of returns.",faq5Q:"When is the mint?",faq5A:"Today, Nov 13, 2026 at 12:00 UTC. Tweet to Mint and Presale open together — apply now so you are ready.",faq6Q:"Can I sell my spirit?",faq6A:"Yes — spirits trade on the collection's own marketplace (0% fee) once mint opens, and on secondary markets.",footFollow:"Follow @mycowner",footPost:"Post to X",footTagline:"MYCO — Find your spirit. 🍄",footTag:"Mint opens Nov 13, 12:00 UTC · BNB Chain",footNote:"Contracts deployed · Mint opens Nov 13, 12:00 UTC.",floatApply:"Apply 🍄",phWhy:"One line about your spirit...",formErrX:"Please paste a valid X post link.",formErrW:"Please enter a valid wallet address (0x...).",formMsg:"Applications open today at 12:00 UTC — this form is a preview. Your details were not sent anywhere.",navMint:"Mint",btnMint:"Mint",ctaMint:"Mint now",floatMint:"Mint 🍄",secMintNum:"03 · Mint",secMintH:"Mint your spirit",secMintLead:"Contracts are deployed. Mint opens today at 12:00 UTC — free for allowlisted Agent ID holders, presale 0.0005 BNB after that.",mintBoxH:"Mint",mintBoxP:"Connect your wallet. Free mint needs an Agent ID + allowlist approval. Paid mints need an Agent ID.",modeFree:"Free · Agent ID",modePaid:"Paid · Agent ID",totalLabel:"Total",mintBtnFree:"Mint free spirit",mintBtnPaid:"Mint spirits",promptLabel:"Agent prompt — copy & paste to your agent",copyBtn:"Copy prompt",checkLabel:"Agent ID checker",checkBtn:"Check",cNft:"MYCO NFT",cTok:"$MYCO token",cMkt:"Marketplace",cRoy:"Royalty",cBase:"Metadata",mintNote:"Mint opens 12:00 UTC, Nov 13 2026. Tweet to Mint is free for allowlisted wallets only — reply to the announcement on X to apply. Presale 0.0005 BNB, public 0.001 BNB.",stSoon:"MINT OPENS 12:00 UTC",stLive:"MINT LIVE",stSold:"SOLD OUT",phasePre:"· presale",phasePub:"· public"},
+ja:{bar:"本日12:00 UTC ミント開始 · 3,333体",navSpirits:"精霊",navApply:"申請",navSchemes:"スキーム",navReturn:"戻る理由",navFaq:"FAQ",btnApply:"申請",heroH1:"あなたの<em>精霊</em>を見つけよう。",heroP:"BNBチェーンで育った——作られたのではない——3,333体のきのこの森の精霊。ひとつひとつが唯一無二。キープ、ステーク、$MYCOにバーン、すべてあなたのもの。",mintPill:"🍄 本日ミント開始 · 12:00 UTC（19:00 WIB）",statSpirits:"精霊",statKinds:"種類",statToken:"トークン",statForest:"森",ctaApply:"アローリストに申請",ctaSchemes:"スキームを見る",secSpiritsNum:"01 · 精霊たち",secSpiritsH:"森に出会おう",secSpiritsLead:"33種類が木の下に生きている——森のすべてがここに。どの精霊も唯一無二、同じ帽子はふたつとない。",secApplyNum:"02 · 申請 — ツイートでミント",secApplyH:"声を上げよう",secApplyLead:"このページにウォレットは接続しません。ミントするのはあなたのエージェント——話すのはあなたです。リポストして、貼って、受け取る。",step1H:"Xで告知をリポスト",step1P:"<a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> のMYCO告知をXでシェア。引用でもリプライでもOK。いいねは任意です。",step2H:"X投稿のリンクを貼る",step2P:"下のフォームに投稿リンクを貼ってください。Xアカウントごとに1件。リンクはすべて手作業で確認します。",step3H:"ウォレットで受け取る",step3P:"自分が管理するウォレットアドレスを追加。承認された申請は無料でミント——初回ミントにはAgent IDが必要です。",applyBoxH:"申請を送信",applyBoxP:"申請は手作業で審査します。承認された精霊は無料でミント——1ウォレットにつき1体。",labelX:"X投稿へのリンク",labelWallet:"ウォレットアドレス（BNBチェーン）",labelWhy:"あなたがMYCOである理由は？（任意）",submitBtn:"申請を送信",applyNote:"Xアカウントとウォレットごとに1件の申請。すべての決定は手作業で審査します。ミントにはAgent IDの保有が必要——無料の初回ミントは、認証済み投稿を持つAgent ID保有者のためのものです。",secSchemesNum:"04 · スキームと支払い",secSchemesH:"ミントだけじゃない",secSchemesLead:"MYCOはミント当日が終わっても森が育ち続けるようにつくられています。ローンチ順：ツイートでミント → プレセール → マイニング → バーン → ノード。",presaleTag:"プレセール",presalePhase:"12:00 UTC開始",presaleH:"プレセール — 早い胞子",presaleP:"パブリックミント開始前に購入。Agent IDのみ、1ウォレット最大5体、供給量の20〜30%。",presaleB1:"パブリック価格の半額",presaleB2:"同じ精霊を、早く受け取る",presaleB3:"未請求のプレセール分はパブリックへ",miningTag:"マイニング · ステークで稼ぐ",miningPhase:"ミント後に開始",miningH:"マイニング — 精霊をステーク",miningP:"精霊をステークすると毎日$MYCOがもらえます。レアな精霊ほど多く稼げます。いつでもアンステーク可能。",miningB1:"コモン：1 $MYCO / 日",miningB2:"レア：5 $MYCO / 日",miningB3:"報酬は固定の180万$MYCOプールから",burnTag:"バーン · NFTをトークンに",burnPhase:"ミント後に開始",burnH:"バーン — 精霊が$MYCOになる",burnP:"いらなくなった精霊をバーンして$MYCOを受け取る。森は小さくなる——残った精霊はよりレアに。",burnB1:"コモンバーン：50 $MYCO",burnB2:"レアバーン：500 $MYCO",burnB3:"バーンは取り消せません",nodeTag:"ノードマイニング",nodePhase:"ミント後に開始",nodeH:"ノード — 林を育てる",nodeP:"ノードを持てば、あなたの林が毎日$MYCOを稼ぎます。ミニ5/日 · スタンダード15/日 · メガ40/日。報酬のみ——リターンの約束ではありません。",nodeB1:"ミニノード：0.02 BNB → 5 $MYCO / 日",nodeB2:"スタンダードノード：0.05 BNB → 15 $MYCO / 日",nodeB3:"メガノード：0.1 BNB → 40 $MYCO / 日",secReturnNum:"05 · なぜ戻ってくるのか",secReturnH:"森は育ち続ける",secReturnLead:"ほとんどのミントはミント当日に終わります。MYCOはループ——訪れるたびに、滞在する理由があります。",loop1H:"精霊をミント",loop1P:"Agent IDと認証済み投稿で初回ミント無料。早い人にはプレセールも。",loop2H:"ステークして、毎日稼ぐ",loop2P:"ステークしている間、精霊は毎日$MYCOを稼ぎます。チェックインして、受け取って、繰り返す。",loop3H:"いらないものはバーン",loop3P:"重複やコモンは$MYCOに。森は薄くなり——あなたの精霊の価値は上がる。",loop4H:"ノードを育てる",loop4P:"$MYCOを、自分で稼ぐ林に変える。根が深いほど、収穫は安定する。",tokToken:"トークン",tokSupply:"総供給量",tokPool:"報酬プール（マイニング + バーン + ノード）",tokTreasury:"トレジャリー",tokChain:"チェーン",tokNote:"このページの数字はすべてプレビューで、ローンチ前に変更される場合があります。$MYCOの報酬はユーティリティ報酬であり、リターンの約束ではありません。",secFaqNum:"06 · 質問",secFaqH:"よくある質問",faq1Q:"MYCOとは？",faq1A:"MYCOはBNBチェーン上の3,333体のきのこの森の精霊です。どの精霊も唯一無二で、ステーク、バーン、ノード化して$MYCOを得ることができます。",faq2Q:"どうやって申請するの？",faq2A:"Xで告知をリポストし、上のフォームに投稿リンクを貼り、ウォレットアドレスを追加してください。申請は手作業で審査します——Xアカウントとウォレットごとに1件です。",faq3Q:"Agent IDは必要？",faq3A:"はい、ミントには必要です。MYCOはBinance Agentic Walletのエージェントのために作られました——無料の初回ミントにも有料ミントにもAgent ID（SPACE ID）の保有が必要です。",faq4Q:"$MYCOは何のため？",faq4A:"$MYCOは森の報酬トークンです。精霊のステーク、バーン、ノード運営で得られます。ユーティリティ報酬であり、リターンの約束ではありません。",faq5Q:"ミントはいつ？",faq5A:"本日、2026年11月13日 12:00 UTC。ツイートでミントとプレセールが同時に開始——今すぐ申請して準備しよう。",faq6Q:"精霊は売れる？",faq6A:"はい——ミント開始後、コレクション独自のマーケットプレイス（手数料0%）やセカンダリーマーケットで取引できます。",footFollow:"フォロー @mycowner",footPost:"Xに投稿",footTagline:"MYCO — あなたの精霊を見つけよう。🍄",footTag:"ミント開始 11月13日 12:00 UTC · BNBチェーン",footNote:"コントラクトはデプロイ済み · ミントは11月13日 12:00 UTCに開始。",floatApply:"申請 🍄",phWhy:"あなたの精霊について一言…",formErrX:"有効なX投稿リンクを貼ってください。",formErrW:"有効なウォレットアドレスを入力してください（0x...）。",formMsg:"申請は本日12:00 UTCに受付開始——このフォームはプレビューです。あなたの情報はどこにも送信されていません。",navMint:"ミント",btnMint:"ミント",ctaMint:"今すぐミント",floatMint:"ミント 🍄",secMintNum:"03 · ミント",secMintH:"精霊をミント",secMintLead:"コントラクトはデプロイ済み。ミントは本日12:00 UTCに開始——許可リストのAgent ID保有者は無料、その後はプレセール0.0005 BNB。",mintBoxH:"ミント",mintBoxP:"ウォレットを接続してください。無料ミントにはAgent IDと許可リストの承認が必要です。有料ミントにもAgent IDが必要です。",modeFree:"無料 · Agent ID",modePaid:"有料 · Agent ID",totalLabel:"合計",mintBtnFree:"無料でミント",mintBtnPaid:"ミントする",promptLabel:"エージェントプロンプト — コピーしてエージェントに貼る",copyBtn:"プロンプトをコピー",checkLabel:"Agent IDチェッカー",checkBtn:"確認",cNft:"MYCO NFT",cTok:"$MYCOトークン",cMkt:"マーケットプレイス",cRoy:"ロイヤリティ",cBase:"メタデータ",mintNote:"ミントは2026年11月13日 12:00 UTCに開始。ツイートでミントは許可リストのウォレットのみ無料——申請するにはXの告知にリプライしてください。プレセール0.0005 BNB、パブリック0.001 BNB。",stSoon:"ミント開始 12:00 UTC",stLive:"ミント受付中",stSold:"完売",phasePre:"· プレセール",phasePub:"· パブリック"},
+zh:{bar:"今日 12:00 UTC 开启铸造 · 3,333 只",navSpirits:"精灵",navApply:"申请",navSchemes:"方案",navReturn:"回来的理由",navFaq:"常见问题",btnApply:"申请",heroH1:"找到你的<em>精灵</em>。",heroP:"3,333 只蘑菇森林精灵，在 BNB 链上生长而成——而非制造。每一只都独一无二。你可以持有、质押，或销毁换取 $MYCO。",mintPill:"🍄 今日开启铸造 · 12:00 UTC（19:00 WIB）",statSpirits:"精灵",statKinds:"种类",statToken:"代币",statForest:"森林",ctaApply:"申请白名单",ctaSchemes:"查看方案",secSpiritsNum:"01 · 精灵们",secSpiritsH:"认识这片森林",secSpiritsLead:"33 个种类生活在树冠之下——整片森林都在这里。每一只精灵都独一无二，没有两顶相同的帽子。",secApplyNum:"02 · 申请 — 发推铸造",secApplyH:"发出你的声音",secApplyLead:"本页面不连接钱包。铸造由你的智能体完成——发声由你来做。转发、粘贴、领取。",step1H:"在 X 上转发公告",step1P:"在 X 上分享 <a href=\"https://x.com/mycowner\" target=\"_blank\" rel=\"noopener\">@mycowner</a> 的 MYCO 公告。引用或回复都可以。点赞随意。",step2H:"粘贴你的 X 帖子链接",step2P:"在下方表格中粘贴你的帖子链接。每个 X 账号限申请一次。我们会人工核查每条链接。",step3H:"用钱包领取",step3P:"填写你控制的钱包地址。获批申请可免费铸造——首次铸造需要 Agent ID。",applyBoxH:"提交你的申请",applyBoxP:"申请由人工审核。获批的精灵可免费铸造——每个钱包限领一只。",labelX:"你的 X 帖子链接",labelWallet:"钱包地址（BNB 链）",labelWhy:"为什么你是 MYCO？（选填）",submitBtn:"提交申请",applyNote:"每个 X 账号和钱包限申请一次。所有决定均人工审核。铸造需要持有 Agent ID——免费首次铸造面向持有 Agent ID 且帖子已验证的用户。",secSchemesNum:"04 · 方案与支付",secSchemesH:"不止于铸造",secSchemesLead:"MYCO 的设计让森林在铸造日之后继续生长。发布顺序：发推铸造 → 预售 → 挖矿 → 销毁 → 节点。",presaleTag:"预售",presalePhase:"12:00 UTC 开启",presaleH:"预售 — 早期的孢子",presaleP:"在公开铸造开始前购买。仅限 Agent ID，每个钱包最多 5 只，占供应量的 20–30%。",presaleB1:"公开价的一半",presaleB2:"同样的精灵，更早领取",presaleB3:"未领取的预售份额转入公开",miningTag:"挖矿 · 质押赚取",miningPhase:"铸造后开启",miningH:"挖矿 — 质押你的精灵",miningP:"质押精灵，每天赚取 $MYCO。越稀有的精灵赚得越多。随时可以取消质押。",miningB1:"普通精灵：1 $MYCO / 天",miningB2:"稀有精灵：5 $MYCO / 天",miningB3:"奖励来自固定的 180 万 $MYCO 奖池",burnTag:"销毁 · NFT 换代币",burnPhase:"铸造后开启",burnH:"销毁 — 精灵变成 $MYCO",burnP:"销毁你不再需要的精灵，获得 $MYCO。森林变小了——剩下的精灵更稀有。",burnB1:"普通销毁：50 $MYCO",burnB2:"稀有销毁：500 $MYCO",burnB3:"销毁是永久性的",nodeTag:"节点挖矿",nodePhase:"铸造后开启",nodeH:"节点 — 种出一片林子",nodeP:"拥有一个节点，你的林子每天都能赚取 $MYCO。迷你 5/天 · 标准 15/天 · 巨型 40/天。仅为奖励——不承诺回报。",nodeB1:"迷你节点：0.02 BNB → 5 $MYCO / 天",nodeB2:"标准节点：0.05 BNB → 15 $MYCO / 天",nodeB3:"巨型节点：0.1 BNB → 40 $MYCO / 天",secReturnNum:"05 · 为什么回来",secReturnH:"森林不断生长",secReturnLead:"大多数铸造在铸造日当天就结束了。MYCO 是一个循环——每次来访都有留下的理由。",loop1H:"铸造你的精灵",loop1P:"凭 Agent ID 和已验证的帖子，首次铸造免费。早到者可参与预售。",loop2H:"质押它，每天赚钱",loop2P:"只要保持质押，你的精灵每天都会赚取 $MYCO。签到、领取、重复。",loop3H:"销毁你不需要的",loop3P:"重复和普通的精灵变成 $MYCO。森林变稀疏了——你的精灵更有价值。",loop4H:"种出一个节点",loop4P:"把 $MYCO 变成能自己赚钱的林子。根扎得越深，收益越稳定。",tokToken:"代币",tokSupply:"总供应量",tokPool:"奖励池（挖矿 + 销毁 + 节点）",tokTreasury:"金库",tokChain:"链",tokNote:"本页面所有数字均为预览，发布前可能更改。$MYCO 奖励为实用型奖励——不承诺回报。",secFaqNum:"06 · 问题",secFaqH:"常见问题",faq1Q:"什么是 MYCO？",faq1A:"MYCO 是 BNB 链上的 3,333 只蘑菇森林精灵。每一只都独一无二，可以质押、销毁，或发展成节点以赚取 $MYCO。",faq2Q:"如何申请？",faq2A:"在 X 上转发公告，在上方表格中粘贴帖子链接，并填写钱包地址。申请由人工审核——每个 X 账号和钱包限一次。",faq3Q:"需要 Agent ID 吗？",faq3A:"是的，铸造需要。MYCO 专为币安智能钱包（Binance Agentic Wallet）的智能体打造——免费首次铸造和付费铸造都需要持有 Agent ID（SPACE ID）。",faq4Q:"$MYCO 有什么用？",faq4A:"$MYCO 是森林的奖励代币：通过质押精灵、销毁精灵和运行节点赚取。它是实用型奖励，不承诺回报。",faq5Q:"什么时候铸造？",faq5A:"今天，2026 年 11 月 13 日 12:00 UTC。发推铸造与预售同时开启——现在就申请，做好准备。",faq6Q:"可以出售我的精灵吗？",faq6A:"可以——铸造开启后，可在该系列自有市场（0 手续费）及二级市场交易。",footFollow:"关注 @mycowner",footPost:"发布到 X",footTagline:"MYCO — 找到你的精灵。🍄",footTag:"铸造于 11 月 13 日 12:00 UTC 开启 · BNB 链",footNote:"合约已部署 · 铸造于 11 月 13 日 12:00 UTC 开启。",floatApply:"申请 🍄",phWhy:"用一句话介绍你的精灵……",formErrX:"请粘贴有效的 X 帖子链接。",formErrW:"请输入有效的钱包地址（0x...）。",formMsg:"申请将于今日 12:00 UTC 开放——此表单为预览。你的信息没有发送到任何地方。",navMint:"铸造",btnMint:"铸造",ctaMint:"立即铸造",floatMint:"铸造 🍄",secMintNum:"03 · 铸造",secMintH:"铸造你的精灵",secMintLead:"合约已部署。铸造将于今日 12:00 UTC 开启——白名单 Agent ID 持有者免费，其后预售 0.0005 BNB。",mintBoxH:"铸造",mintBoxP:"连接你的钱包。免费铸造需要 Agent ID 和白名单批准。付费铸造需要 Agent ID。",modeFree:"免费 · Agent ID",modePaid:"付费 · Agent ID",totalLabel:"总计",mintBtnFree:"免费铸造",mintBtnPaid:"铸造",promptLabel:"智能体提示词——复制并粘贴给你的智能体",copyBtn:"复制提示词",checkLabel:"Agent ID 检查器",checkBtn:"检查",cNft:"MYCO NFT",cTok:"$MYCO 代币",cMkt:"市场",cRoy:"版税",cBase:"元数据",mintNote:"铸造于 2026 年 11 月 13 日 12:00 UTC 开启。发推铸造仅对白名单钱包免费——请回复 X 上的公告进行申请。预售 0.0005 BNB，公开 0.001 BNB。",stSoon:"铸造 12:00 UTC 开启",stLive:"铸造进行中",stSold:"已售罄",phasePre:"· 预售",phasePub:"· 公开"}};
 var SPIRITS=[
 {img:"hero.jpg",name:"Moss",tag:{en:"MOSS · THE ELDER",ja:"MOSS · 長老",zh:"Moss · 长老"},d:{en:"The first spirit. A mossy cap dotted with glowing spores, keeper of the old paths.",ja:"最初の精霊。光る胞子をまとった苔の帽子、古い小道の守り手。",zh:"第一位精灵。戴着长满发光孢子的苔藓帽，是古老小径的守护者。"}},
 {img:"amanita.jpg",name:"Amanita",tag:{en:"AMANITA · THE CHEERFUL",ja:"AMANITA · 陽気",zh:"Amanita · 开朗"},d:{en:"Red cap, white dots, always smiling. Carries an acorn everywhere it goes.",ja:"赤い帽子に白い水玉、いつも笑顔。どんぐりをいつも持ち歩く。",zh:"红帽白点，总是微笑。走到哪里都带着一颗橡子。"}},
@@ -359,6 +440,7 @@ function setLang(l){
     });
   });
   renderGallery(l);
+  if(window.renderMintTexts)renderMintTexts();
 }
 document.querySelectorAll("[data-lang-group] button").forEach(function(b){
   b.addEventListener("click",function(){setLang(b.getAttribute("data-lang"));});
@@ -383,6 +465,179 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
   msg.className='apply-msg ok';
   msg.textContent=I18N[curLang].formMsg;
 });
+/* ---- Mint panel ---- */
+var NFT="0x86229C12DB0F8F5816750Eb2A4ac6076FDb912d3";
+var REGISTRY="0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
+var RPC_URL="https://bsc-dataseed1.bnbchain.org/";
+var SEL={mintOpen:"0x24bbd049",totalMinted:"0xa2309ff8",publicOpen:"0xba70c515",mintFree:"0x8ab53447",mintPaid:"0x26c7f77c",quote:"0xfba2a03e",allowlisted:"0x03f45d41",balanceOf:"0x70a08231"};
+var MINT_ERRORS={NotAgent:"0x0d9ab13f",MintClosed:"0x589ed34b",SoldOut:"0x52df9fe5",OverLimit:"0xb92612ed",Underpaid:"0xa5cc3e35",FreeClaimed:"0x775c0fe5",NotAllowlisted:"0x06fb10a9"};
+var STATUS={
+en:{needWallet:"Connect your wallet first.",noWallet:"No wallet found. Open this page in a wallet browser (e.g. MetaMask).",chain:"Switching to BNB Chain...",chainFail:"Please switch your wallet to BNB Chain (chain 56).",sending:"Sending transaction...",success:"Minted!",errNotAgent:"This wallet has no Agent ID — minting needs an Agent ID.",errNotAllow:"This wallet is not allowlisted for the free mint. Reply to the announcement on X to apply.",errClosed:"Mint is not open yet — it opens 12:00 UTC.",errSoldOut:"Sold out.",errOver:"Over the wallet limit (max 6 per wallet).",errUnder:"Not enough BNB sent.",errFree:"You already claimed your free mint.",errUnknown:"Transaction failed. Check BscScan for details.",errQuote:"Could not read the price — try again.",chkYes:"✓ This wallet holds an Agent ID — it can mint.",chkNo:"✗ This wallet has no Agent ID.",chkErr:"Could not check — enter a valid address (0x...).",wallet:"Connect wallet",copied:"Copied ✓"},
+ja:{needWallet:"まずウォレットを接続してください。",noWallet:"ウォレットが見つかりません。ウォレットブラウザで開いてください（例：MetaMask）。",chain:"BNBチェーンに切り替え中…",chainFail:"ウォレットをBNBチェーン（チェーン56）に切り替えてください。",sending:"トランザクションを送信中…",success:"ミント完了！",errNotAgent:"このウォレットにはAgent IDがありません——ミントにはAgent IDが必要です。",errNotAllow:"このウォレットは無料ミントの許可リストにありません。Xの告知にリプライして申請してください。",errClosed:"ミントはまだ開始していません——12:00 UTCに開始します。",errSoldOut:"完売しました。",errOver:"ウォレット上限を超えています（1ウォレット最大6個）。",errUnder:"送られたBNBが不足しています。",errFree:"無料ミントはすでに受け取り済みです。",errUnknown:"トランザクションに失敗しました。BscScanで確認してください。",errQuote:"価格を読み取れませんでした——もう一度お試しください。",chkYes:"✓ このウォレットはAgent IDを保有しています——ミントできます。",chkNo:"✗ このウォレットにはAgent IDがありません。",chkErr:"確認できませんでした——有効なアドレスを入力してください（0x...）。",wallet:"ウォレットを接続",copied:"コピーしました ✓"},
+zh:{needWallet:"请先连接钱包。",noWallet:"未找到钱包。请在钱包浏览器中打开本页面（例如 MetaMask）。",chain:"正在切换到 BNB 链…",chainFail:"请将钱包切换到 BNB 链（链 56）。",sending:"正在发送交易…",success:"铸造成功！",errNotAgent:"该钱包没有 Agent ID——铸造需要 Agent ID。",errNotAllow:"该钱包不在免费铸造白名单中。请回复 X 上的公告进行申请。",errClosed:"铸造尚未开启——将于 12:00 UTC 开启。",errSoldOut:"已售罄。",errOver:"超过钱包上限（每个钱包最多 6 个）。",errUnder:"发送的 BNB 不足。",errFree:"你已领取过免费铸造。",errUnknown:"交易失败。请查看 BscScan 了解详情。",errQuote:"无法读取价格——请重试。",chkYes:"✓ 该钱包持有 Agent ID——可以铸造。",chkNo:"✗ 该钱包没有 Agent ID。",chkErr:"无法检查——请输入有效地址（0x...）。",wallet:"连接钱包",copied:"已复制 ✓"}};
+var mintMode="free",mintQty=1,mintIsOpen=false,mintIsPublic=false,mintTotalMinted=0;
+function st(key){return STATUS[curLang][key]||STATUS.en[key];}
+function rpcCall(to,data){
+  return fetch(RPC_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"eth_call",params:[{to:to,data:data},"latest"]})}).then(function(r){return r.json();}).then(function(j){return j.result;});
+}
+function padAddr(a){return "000000000000000000000000"+a.toLowerCase().replace(/^0x/,"");}
+function encUint(n){return n.toString(16).padStart(64,"0");}
+function bnb(wei){var w=BigInt(wei);var whole=w/1000000000000000000n;var frac=w%1000000000000000000n;var f=frac.toString().padStart(18,"0").slice(0,4).replace(/0+$/,"");return f?whole.toString()+"."+f:whole.toString();}
+function shortAddr(a){return a.slice(0,6)+"…"+a.slice(-4);}
+function setMintStatus(msg,isErr,isHtml){
+  var el=document.getElementById("mintStatus");
+  el.className="mint-status show"+(isErr?" err":" ok");
+  if(isHtml)el.innerHTML=msg;else el.textContent=msg;
+}
+function renderMintTexts(){
+  var ms=document.getElementById("mintState");
+  ms.textContent=mintTotalMinted>=3333?I18N[curLang].stSold:(mintIsOpen?I18N[curLang].stLive:I18N[curLang].stSoon);
+  ms.classList.toggle("live",mintIsOpen&&mintTotalMinted<3333);
+  var ph=document.getElementById("pricePhase");
+  if(ph)ph.textContent=mintIsPublic?I18N[curLang].phasePub:I18N[curLang].phasePre;
+  document.getElementById("mintBtn").textContent=mintMode==="free"?I18N[curLang].mintBtnFree:I18N[curLang].mintBtnPaid;
+  updateWalletLine();
+}
+function updateWalletLine(){
+  var el=document.getElementById("walletLine");
+  if(window.__mycoAccount){el.textContent="● "+shortAddr(window.__mycoAccount);}
+  else el.textContent="○ "+st("wallet");
+}
+function agentPrompt(){
+  if(mintMode==="free")return "Mint 1 free MYCO spirit with my Binance Agentic Wallet. Contract 0x86229C12DB0F8F5816750Eb2A4ac6076FDb912d3, call mintFree(). I hold a SPACE ID Agent ID and my wallet is allowlisted. Confirm the transaction preview, then send it.";
+  var price=mintIsPublic?0.001:0.0005;
+  var total=(price*mintQty).toFixed(4).replace(/0+$/,"").replace(/\.$/,"");
+  return "Mint "+mintQty+" MYCO spirit"+(mintQty>1?"s":"")+" with my Binance Agentic Wallet. Contract 0x86229C12DB0F8F5816750Eb2A4ac6076FDb912d3, call mintPaid("+mintQty+") with "+total+" BNB total ("+(mintIsPublic?"public 0.001 BNB each":"presale 0.0005 BNB each")+"). I hold a SPACE ID Agent ID. Confirm the transaction preview, then send it.";
+}
+function renderAgentPrompt(){document.getElementById("agentPrompt").textContent=agentPrompt();}
+function copyText(t,btn){
+  function done(){var old=btn.textContent;btn.textContent=st("copied");setTimeout(function(){btn.textContent=old;},2600);}
+  function fallback(){var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(ta);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(function(){fallback();});}
+  else fallback();
+}
+function refreshChain(){
+  rpcCall(NFT,SEL.mintOpen).then(function(r){mintIsOpen=parseInt(r,16)===1;renderMintTexts();}).catch(function(){});
+  rpcCall(NFT,SEL.totalMinted).then(function(r){mintTotalMinted=parseInt(r,16);document.getElementById("mintedCount").textContent=mintTotalMinted;renderMintTexts();}).catch(function(){});
+  rpcCall(NFT,SEL.publicOpen).then(function(r){mintIsPublic=parseInt(r,16)===1;renderMintTexts();updatePrice();}).catch(function(){});
+}
+function updatePrice(){
+  if(mintMode!=="paid")return;
+  var acct=window.__mycoAccount||"0x0000000000000000000000000000000000000000";
+  rpcCall(NFT,SEL.quote+padAddr(acct)+encUint(mintQty)).then(function(r){
+    var wei=BigInt(r);
+    document.getElementById("totalPrice").textContent=bnb(wei)+" BNB";
+    renderAgentPrompt();
+  }).catch(function(){
+    var price=mintIsPublic?1000000000000000n:500000000000000n;
+    document.getElementById("totalPrice").textContent=bnb(price*BigInt(mintQty))+" BNB";
+    renderAgentPrompt();
+  });
+}
+function setMode(m){
+  mintMode=m;
+  document.getElementById("btnFree").classList.toggle("active",m==="free");
+  document.getElementById("btnPaid").classList.toggle("active",m==="paid");
+  document.getElementById("qtyRow").style.display=m==="paid"?"flex":"none";
+  document.getElementById("mintBtn").textContent=m==="free"?I18N[curLang].mintBtnFree:I18N[curLang].mintBtnPaid;
+  if(m==="paid")updatePrice();
+  renderAgentPrompt();
+}
+function provider(){return window.ethereum||null;}
+function ensureChain(){
+  var p=provider();
+  return p.request({method:"eth_chainId"}).then(function(id){
+    if(id==="0x38")return;
+    return p.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x38"}]}).catch(function(){
+      return p.request({method:"wallet_addEthereumChain",params:[{chainId:"0x38",chainName:"BNB Smart Chain",nativeCurrency:{name:"BNB",symbol:"BNB",decimals:18},rpcUrls:["https://bsc-dataseed1.bnbchain.org/"],blockExplorerUrls:["https://bscscan.com"]}]});
+    });
+  });
+}
+function connectWallet(){
+  var p=provider();
+  if(!p)return Promise.reject(new Error("nowallet"));
+  return p.request({method:"eth_requestAccounts"}).then(function(acc){
+    window.__mycoAccount=acc[0];
+    updateWalletLine();
+    return acc[0];
+  });
+}
+function waitReceipt(hash){
+  return new Promise(function(resolve,reject){
+    var tries=0;
+    (function poll(){
+      fetch(RPC_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"eth_getTransactionReceipt",params:[hash]})}).then(function(r){return r.json();}).then(function(j){
+        if(j.result){resolve(j.result);}
+        else if(++tries>40){reject(new Error("timeout"));}
+        else setTimeout(poll,3000);
+      }).catch(function(){if(++tries>40)reject(new Error("timeout"));else setTimeout(poll,3000);});
+    })();
+  });
+}
+function errKeyFrom(e){
+  var m=(e&&e.message?e.message:"")+""+(e&&e.data?JSON.stringify(e.data):"");
+  for(var k in MINT_ERRORS){if(m.indexOf(MINT_ERRORS[k].slice(2))>=0||m.indexOf(MINT_ERRORS[k])>=0)return k;}
+  return null;
+}
+function doMint(){
+  var p=provider();
+  if(!p){setMintStatus(st("noWallet"),true);return;}
+  if(!mintIsOpen){setMintStatus(st("errClosed"),true);return;}
+  setMintStatus(st("sending"),false);
+  connectWallet().then(function(acct){
+    return ensureChain().then(function(){return acct;});
+  }).then(function(acct){
+    if(mintMode==="free"){
+      return p.request({method:"eth_sendTransaction",params:[{from:acct,to:NFT,value:"0x0",data:SEL.mintFree}]});
+    }
+    return rpcCall(NFT,SEL.quote+padAddr(acct)+encUint(mintQty)).then(function(q){
+      var val=q||("0x"+(BigInt(mintIsPublic?1000000000000000:500000000000000)*BigInt(mintQty)).toString(16));
+      return p.request({method:"eth_sendTransaction",params:[{from:acct,to:NFT,value:val,data:SEL.mintPaid+encUint(mintQty)}]});
+    });
+  }).then(function(hash){
+    return waitReceipt(hash).then(function(rc){
+      if(rc.status==="0x1"){
+        setMintStatus(st("success")+' <a href="https://bscscan.com/tx/'+hash+'" target="_blank" rel="noopener">BscScan ↗</a>',false,true);
+        refreshChain();
+      }else setMintStatus(st("errUnknown"),true);
+    });
+  }).catch(function(e){
+    var k=errKeyFrom(e);
+    if(k==="NotAgent")setMintStatus(st("errNotAgent"),true);
+    else if(k==="NotAllowlisted")setMintStatus(st("errNotAllow"),true);
+    else if(k==="MintClosed")setMintStatus(st("errClosed"),true);
+    else if(k==="SoldOut")setMintStatus(st("errSoldOut"),true);
+    else if(k==="OverLimit")setMintStatus(st("errOver"),true);
+    else if(k==="Underpaid")setMintStatus(st("errUnder"),true);
+    else if(k==="FreeClaimed")setMintStatus(st("errFree"),true);
+    else if(e&&e.message==="nowallet")setMintStatus(st("noWallet"),true);
+    else if(e&&/chain/i.test(e.message||""))setMintStatus(st("chainFail"),true);
+    else setMintStatus(st("errUnknown"),true);
+  });
+}
+document.getElementById("btnFree").addEventListener("click",function(){setMode("free");});
+document.getElementById("btnPaid").addEventListener("click",function(){setMode("paid");});
+document.getElementById("qtyMinus").addEventListener("click",function(){if(mintQty>1){mintQty--;document.getElementById("qtyNum").textContent=mintQty;updatePrice();}});
+document.getElementById("qtyPlus").addEventListener("click",function(){if(mintQty<5){mintQty++;document.getElementById("qtyNum").textContent=mintQty;updatePrice();}});
+document.getElementById("mintBtn").addEventListener("click",doMint);
+document.getElementById("copyPromptBtn").addEventListener("click",function(){copyText(agentPrompt(),this);});
+document.getElementById("agentCheckBtn").addEventListener("click",function(){
+  var a=document.getElementById("agentAddr").value.trim();
+  var out=document.getElementById("agentCheckOut");
+  if(!/^0x[0-9a-fA-F]{40}$/.test(a)){out.className="check-out show err";out.textContent=st("chkErr");return;}
+  rpcCall(REGISTRY,SEL.balanceOf+padAddr(a)).then(function(r){
+    var has=BigInt(r)>0n;
+    out.className="check-out show "+(has?"ok":"err");
+    out.textContent=has?st("chkYes"):st("chkNo");
+  }).catch(function(){out.className="check-out show err";out.textContent=st("chkErr");});
+});
+if(window.ethereum){
+  window.ethereum.on("accountsChanged",function(acc){window.__mycoAccount=acc[0]||null;updateWalletLine();});
+  window.ethereum.on("chainChanged",function(){refreshChain();});
+}
+renderAgentPrompt();
+refreshChain();
+setInterval(refreshChain,30000);
 try{var saved=localStorage.getItem("myco-lang");if(saved)setLang(saved);else setLang("en");}catch(e){setLang("en");}
 </script>
 </body>
