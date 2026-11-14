@@ -15,9 +15,11 @@
 //   Shaggy Mane 2930-3030 / Maitake 3031-3131 / Witch's Butter 3132-3232 /
 //   Fairy Ring 3233-3333.
 //   MINT (launch order user-confirmed 2026-11-13):
-//   1. Tweet to Mint — FREE #1, allowlist ONLY (owner adds wallets that
-//      reposted the announcement on X and were reviewed by hand) +
-//      Agent ID. One free per wallet.
+//   1. Free — FREE #1, Agent ID ONLY, NO allowlist (v2, redeployed
+//      2026-11-14 at user order "Open free mint buat myco tanpa
+//      whitelist": the v1 contract gated mintFree behind an allowlist
+//      with no toggle, so a new NFT contract was deployed. One free
+//      per wallet.
 //   2. Presale — 0.0005 BNB each, Agent ID ONLY, max 5 paid per wallet.
 //      Opens together with Tweet to Mint at 12:00 UTC, Nov 13 2026.
 //   3. Public — 0.001 BNB each, Agent ID ONLY, same max 5 paid/wallet.
@@ -30,8 +32,8 @@
 //   Mint money: forwarded to the owner (project wallet) in the same tx;
 //   the contract does not hold mint revenue.
 //   Royalty 5% (ERC-2981, standing default — NOT separately confirmed).
-//   Owner can ONLY: open/close mint, flip the public phase, manage the
-//   allowlist, set base URI, withdraw stuck funds.
+//   Owner can ONLY: open/close mint, flip the public phase,
+//   set base URI, withdraw stuck funds.
 //   Prices, supply and limits are immutable after deploy.
 //   baseURI: https://myco-one.vercel.app/metadata/
 //   Language: English + Japanese + Chinese (page only).
@@ -71,13 +73,10 @@ contract MycoNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
     mapping(address => uint256) public mintedOf;
     mapping(address => uint256) public freeMintedOf;
     mapping(address => uint256) public paidMintedOf;
-    mapping(address => bool) public allowlisted; // Tweet to Mint approvals
 
     event Minted(address indexed minter, uint256 indexed id, bool paid, uint256 priceWei);
-    event AllowlistSet(address indexed wallet, bool allowed);
 
     error NotAgent();
-    error NotAllowlisted();
     error MintClosed();
     error SoldOut();
     error OverLimit();
@@ -174,10 +173,9 @@ contract MycoNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
         return _ownerOf(id) != address(0);
     }
 
-    /// @notice FREE lane (Tweet to Mint): the wallet's one free spirit.
-    /// Allowlisted (hand-reviewed X repost) + Agent ID ONLY. No payment.
+    /// @notice FREE lane: the wallet's one free spirit.
+    /// Agent ID ONLY, no allowlist. No payment.
     function mintFree() external nonReentrant onlyAgent {
-        if (!allowlisted[msg.sender]) revert NotAllowlisted();
         if (freeMintedOf[msg.sender] >= FREE_PER_WALLET) revert FreeClaimed();
         if (totalMinted + 1 > MAX_SUPPLY) revert SoldOut();
         uint256 id = totalMinted + 1;
@@ -235,14 +233,6 @@ contract MycoNft is ERC721, ERC2981, Ownable, ReentrancyGuard {
 
     function setPublicOpen(bool v) external onlyOwner {
         publicOpen = v;
-    }
-
-    /// @notice Approve (or revoke) wallets for the free Tweet to Mint lane.
-    function setAllowlist(address[] calldata wallets, bool allowed) external onlyOwner {
-        for (uint256 i; i < wallets.length; i++) {
-            allowlisted[wallets[i]] = allowed;
-            emit AllowlistSet(wallets[i], allowed);
-        }
     }
 
     function setBaseURI(string calldata b) external onlyOwner {

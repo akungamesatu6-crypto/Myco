@@ -66,18 +66,15 @@ describe("MYCO", function () {
     expect(await nft.currentPrice()).to.equal(E("0.0005"));
   });
 
-  it("mintFree: closed / non-agent / not allowlisted all revert", async function () {
+  it("mintFree: closed / non-agent revert; any agent mints free (no allowlist)", async function () {
     const NFT = await ethers.getContractFactory("MycoNft");
     const closed = await NFT.deploy(BASE_URI, owner.address, await agentIdMock.getAddress());
     await expect(closed.connect(agent).mintFree()).to.be.revertedWithCustomError(closed, "MintClosed");
     // non-agent (stranger has no Agent ID) on the open contract
     await expect(nft.connect(stranger).mintFree()).to.be.revertedWithCustomError(nft, "NotAgent");
-    // agent without allowlist
-    await expect(nft.connect(agent).mintFree()).to.be.revertedWithCustomError(nft, "NotAllowlisted");
   });
 
-  it("mintFree: allowlisted agent mints id 1 (Moss), once only", async function () {
-    await nft.setAllowlist([agent.address], true);
+  it("mintFree: agent mints id 1 (Moss), once only", async function () {
     await expect(nft.connect(agent).mintFree())
       .to.emit(nft, "Minted").withArgs(agent.address, 1, false, 0);
     expect(await nft.ownerOf(1)).to.equal(agent.address);
